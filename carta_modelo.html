@@ -223,21 +223,38 @@
 </head>
 <body>
 	
-	<header class="print-header">  		
+	<header class="print-header">  	
+	<!--	
 		<img src="img/NCorreios_hori_cor_pos.png" class="logotipo"/>
+	-->
+	<img src="{{imageLogotipo}}" class="logotipo"/>
 	</header>
 	
 	<footer class="print-footer"> 
+		<!--
 		<p>CDIP/BSB - SIA Trecho 03, Lote 710/740 - Zona Industrial (Guará) - Brasília/DF - CEP: 71.200-983</p>
+		-->
 		<!-- A numeração será inserida via ::after --> 
+		<p>{{nomeUnidade}} - {{enderecoUnidade}}</p>
 	</footer>
 	<div class="sheet">  
-		<div class="content">  
+		<div class="content"> 
+		<!-- 
 			<p class="negrito">Carta: 001/2025 — CDIP/BSB.</p> 
+			-->
+			<p class="negrito">{{cartaNumero}} — {{nomeUnidade}}</p>
+			<!--
 			<p id="data-cabecalho" class="text-end">Brasília/DF, 11 de dezembro de 2025.</p>
-
+			-->
+			<p id="data-cabecalho" class="text-end">{{locaData}}</p>
+			<!--
 			<p>Ao DER ALAGOAS</p>    
+			-->
+			<p>{{Saudacao}} {{destinatario}}</p>    
+			<!--
 			<p class=""><span class="negrito">Assunto: </span>Devolução do(s) AR físico(s) digitalizado(s) - <span class="negrito">Sigla:</span> DW - <span class="negrito">Código:</span> 3481</p>    
+			-->
+			<p class=""><span class="negrito">Assunto: </span>Devolução do(s) AR físico(s) digitalizado(s) - <span class="negrito">Sigla:</span> {{sigla}} - <span class="negrito">Código:</span> {{codigo}}</p> 
 			<p class="margem-top">Prezados(as) Senhores(as),</p>    
 
 			<p class="margem-top paragrafo">Estamos encaminhando o(s) AR físico(s) digitalizado(s) conforme a tabela abaixo:</p> 
@@ -253,11 +270,11 @@
 			    <th>Movimento</th>
 			  </tr>
 			  <tr>
-			    <td>Alfreds Futterkiste</td>
-			    <td>Maria Anders</td>
-			    <td>Germany</td>
-			    <td>Maria Anders</td>
-			    <td>Germany</td>
+			    <td>{{loteInicial}}</td>
+			    <td>{{loteFinal}}</td>
+			    <td>{{quantidadeLotes}}</td>
+			    <td>{{quantidadeARs}}</td>
+			    <td>{{movimento}}</td>
 			  </tr>
 			</table>
 
@@ -270,9 +287,9 @@
 			    	<th>Qtd. Lotes</th>
 			  	</tr>
 				<tr>
-				    <td>Magazzini Alimentari Riuniti</td>
-				    <td>Giovanni Rovelli</td>
-				    <td>Italy</td>
+				    <td>{{loteInicialQuebraSequencia}}</td>
+			    	<td>{{loteFinalQuebraSequencia}}</td>
+			    	<td>{{quantidadeLotesQuebraSequencia}}</td>
 				</tr>
 			</table>
 
@@ -281,8 +298,8 @@
 			<br>
 			<p class="margem-top text-center">Atenciosamente,</p>
 			<p class="margem-top padding-top text-center negrito">_________________________________</p>
-			<p class="text-center negrito">Dilza Nunes Costa Santos</p>
-			<p class="text-center">Matrícula: 8.134.226-8</p>
+			<p class="text-center negrito">{{gerenteUnidade}}</p>
+			<p class="text-center">Matrícula: {{matriculaGerenteUnidade}}/p>
 			<p class="text-center">Gerente CDIP Brasília</p> 
 
 
