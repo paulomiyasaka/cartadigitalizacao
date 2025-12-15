@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 	<meta charset="utf-8">
-	<title>Documento A4 para Impressão</title>
+	<title>Documento A4 para Impress&atilde;o</title>
 	<style>
 		/* ---------- Padr&otilde;es gerais ---------- */  
 		:root {    /* Tamanho A4 em mil&iacute;metros */    
@@ -223,21 +223,39 @@
 </head>
 <body>
 	
-	<header class="print-header">  		
-		<img src="../img/NCorreios_hori_cor_pos.png" class="logotipo">
+	<header class="print-header">  	
+	<!--	
+		<img src="img/NCorreios_hori_cor_pos.png" class="logotipo"/>
+		<img src="{{imagemLogotipo}}" class="logotipo"/>
+	-->
+	<img src="../img/NCorreios_hori_cor_pos.png" class="logotipo">
 	</header>
 	
 	<footer class="print-footer"> 
+		<!--
 		<p>CDIP/BSB - SIA Trecho 03, Lote 710/740 - Zona Industrial (Guar&aacute;) - Bras&iacute;lia/DF - CEP: 71.200-983</p>
+		-->
 		<!-- A numera&ccedil;&atilde;o ser&aacute; inserida via ::after --> 
+		<p>CDIP/BSB - SIA Trecho 03, Lote 710/740 - Zona Industrial (Guar&aacute;) - Bras&iacute;lia/DF - CEP: 71.200-983</p>
 	</footer>
 	<div class="sheet">  
-		<div class="content">  
+		<div class="content"> 
+		<!-- 
 			<p class="negrito">Carta: 001/2025 &mdash; CDIP/BSB.</p> 
+			-->
+			<p class="negrito">1/2025 - S&eacute;rie 2 &mdash; CDIP/BSB</p>
+			<!--
 			<p id="data-cabecalho" class="text-end">Bras&iacute;lia/DF, 11 de dezembro de 2025.</p>
-
+			-->
+			<p id="data-cabecalho" class="text-end">Bras&iacute;lia/DF, 13 de dezembro de 2025</p>
+			<!--
 			<p>Ao DER ALAGOAS</p>    
+			-->
+			<p>Ao DER ALAGOAS</p>    
+			<!--
 			<p class=""><span class="negrito">Assunto: </span>Devolu&ccedil;&atilde;o do(s) AR f&iacute;sico(s) digitalizado(s) - <span class="negrito">Sigla:</span> DW - <span class="negrito">C&oacute;digo:</span> 3481</p>    
+			-->
+			<p class=""><span class="negrito">Assunto: </span>Devolu&ccedil;&atilde;o do(s) AR f&iacute;sico(s) digitalizado(s) - <span class="negrito">Sigla:</span> DW - <span class="negrito">C&oacute;digo:</span> 3481</p> 
 			<p class="margem-top">Prezados(as) Senhores(as),</p>    
 
 			<p class="margem-top paragrafo">Estamos encaminhando o(s) AR f&iacute;sico(s) digitalizado(s) conforme a tabela abaixo:</p> 
@@ -253,11 +271,11 @@
 			    <th>Movimento</th>
 			  </tr>
 			  <tr>
-			    <td>Alfreds Futterkiste</td>
-			    <td>Maria Anders</td>
-			    <td>Germany</td>
-			    <td>Maria Anders</td>
-			    <td>Germany</td>
+			    <td>26001138</td>
+			    <td>26001161</td>
+			    <td>25</td>
+			    <td>1234</td>
+			    <td>10/02/2025</td>
 			  </tr>
 			</table>
 
@@ -270,9 +288,9 @@
 			    	<th>Qtd. Lotes</th>
 			  	</tr>
 				<tr>
-				    <td>Magazzini Alimentari Riuniti</td>
-				    <td>Giovanni Rovelli</td>
-				    <td>Italy</td>
+				    <td>26001145</td>
+			    	<td>26001150</td>
+			    	<td>6</td>
 				</tr>
 			</table>
 

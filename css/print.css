@@ -4,7 +4,7 @@
 --a4-height: 297mm;    
 
 /* Margens internas da página impressa */    
---page-margin: 20mm; /* 2 cm */  
+--page-margin: 0mm; /* 2 cm */  
 }  
 
 /* Visualização na tela (opcional): caixa A4 com sombra */  

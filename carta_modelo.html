@@ -6,17 +6,18 @@
 	<style>
 		/* ---------- Padrões gerais ---------- */  
 		:root {    /* Tamanho A4 em milímetros */    
-		--a4-width: 210mm;    
-		--a4-height: 297mm;    
+		--a4-width: 170mm;    
+		--a4-height: 260mm;    
 
 		/* Margens internas da página impressa */    
-		--page-margin: 20mm; /* 2 cm */  
+		--page-margin: 0mm; /* 2 cm */  
 		}  
 
 		/* Visualização na tela (opcional): caixa A4 com sombra */  
 		@media screen {    
 		body {      
-		background: #f0f2f5;      
+		/*background: #f0f2f5;      */
+		background: #fff;      
 		padding: 24px;      
 		font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;    
 		}    
@@ -174,14 +175,6 @@
 			margin-top: 20px;
 		}
 
-		.text-end{
-			text-align: end;
-		}
-
-		.text-center{
-			text-align: center;
-		}
-
 		.paragrafo{
 			text-align: justify;
 			text-indent: 2em;
@@ -214,6 +207,18 @@
 			text-align: left;
 		}
 
+		.text-end{
+			text-align: right;
+		}
+
+		.text-center{
+			text-align: center;
+		}
+
+		.font-rodape{
+			font-size: 10pt;
+		}
+
 
 
 	</style>
@@ -222,38 +227,46 @@
 
 </head>
 <body>
-	
+	<!--
 	<header class="print-header">  	
-	<!--	
+		
 		<img src="img/NCorreios_hori_cor_pos.png" class="logotipo"/>
-	-->
-	<img src="{{imageLogotipo}}" class="logotipo"/>
-	</header>
+		<img src="{{imagemLogotipo}}" class="logotipo"/>
 	
+	<img src="../img/NCorreios_hori_cor_pos.png" class="logotipo"/>
+	</header>
+	-->
+	<!--
 	<footer class="print-footer"> 
-		<!--
+		
 		<p>CDIP/BSB - SIA Trecho 03, Lote 710/740 - Zona Industrial (Guará) - Brasília/DF - CEP: 71.200-983</p>
 		-->
-		<!-- A numeração será inserida via ::after --> 
+		<!-- A numeração será inserida via ::after  
 		<p>{{nomeUnidade}} - {{enderecoUnidade}}</p>
 	</footer>
+	-->
 	<div class="sheet">  
 		<div class="content"> 
 		<!-- 
 			<p class="negrito">Carta: 001/2025 — CDIP/BSB.</p> 
+			
+			<img src="../img/NCorreios_hori_cor_pos.png" class="logotipo"/>
 			-->
 			<p class="negrito">{{cartaNumero}} — {{nomeUnidade}}</p>
+			
 			<!--
 			<p id="data-cabecalho" class="text-end">Brasília/DF, 11 de dezembro de 2025.</p>
 			-->
-			<p id="data-cabecalho" class="text-end">{{locaData}}</p>
+			<p id="data-cabecalho" class="text-end">{{localData}}.</p>
 			<!--
 			<p>Ao DER ALAGOAS</p>    
 			-->
-			<p>{{Saudacao}} {{destinatario}}</p>    
+			<br>
+			<p>{{saudacao}} {{destinatario}}</p>    
 			<!--
 			<p class=""><span class="negrito">Assunto: </span>Devolução do(s) AR físico(s) digitalizado(s) - <span class="negrito">Sigla:</span> DW - <span class="negrito">Código:</span> 3481</p>    
 			-->
+			<br>
 			<p class=""><span class="negrito">Assunto: </span>Devolução do(s) AR físico(s) digitalizado(s) - <span class="negrito">Sigla:</span> {{sigla}} - <span class="negrito">Código:</span> {{codigo}}</p> 
 			<p class="margem-top">Prezados(as) Senhores(as),</p>    
 
@@ -299,16 +312,26 @@
 			<p class="margem-top text-center">Atenciosamente,</p>
 			<p class="margem-top padding-top text-center negrito">_________________________________</p>
 			<p class="text-center negrito">{{gerenteUnidade}}</p>
-			<p class="text-center">Matrícula: {{matriculaGerenteUnidade}}/p>
+			<p class="text-center">Matrícula: {{matriculaGerenteUnidade}}</p>
 			<p class="text-center">Gerente CDIP Brasília</p> 
 
 
 			<p class="margem-top text-start negrito">Recebido por: ____________________</p>
 			<p class="text-start negrito">CPF ou Matrícula: ____________________</p>
 			<p class="text-start negrito">Data: ____/_____/______</p>
-
+			<br>
+			<p class="text-center margem-top font-rodape">{{nomeUnidade}} - {{enderecoUnidade}}</p>
 		</div> 
 	</div> 
+	<!--
+	<footer> 
+		
+		<p>CDIP/BSB - SIA Trecho 03, Lote 710/740 - Zona Industrial (Guará) - Brasília/DF - CEP: 71.200-983</p>
+		-->
+		<!-- A numeração será inserida via ::after  
+		<p>{{nomeUnidade}} - {{enderecoUnidade}}</p>
+	</footer>
+	-->
 </body> 
 </html>
 
