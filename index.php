@@ -26,7 +26,7 @@
           <label for="file" class="form-label ">Selecionar planilha tipo .XLSX</label>
           <input class="form-control" type="file" id="file" name="file" accept=".xlsx">
         </div>
-          <button type="submit" class="btn btn-outline-success">Gerar Cartas</button>
+          <button type="submit" class="btn btn-outline-success">Salvar Arquivo</button>
         </form>        
       </div>
     </div>   

@@ -1,14 +1,11 @@
 <?php
 
-<<<<<<< HEAD:controle/arquivos.php
-=======
 namespace Carta;
 
->>>>>>> origin/main:src/arquivos.php
 /**
  * 
  */
-class arquivos{
+class Arquivos{
 
 	protected $variavel = array();
 

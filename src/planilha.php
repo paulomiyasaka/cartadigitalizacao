@@ -1,16 +1,16 @@
 <?php
-<<<<<<< HEAD:controle/planilha.php
-require 'vendor/autoload.php';
-=======
 namespace Carta;
->>>>>>> origin/main:src/planilha.php
+
+require 'vendor/autoload.php';
+
+
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;	
 /**
  * 
  */
-class planilha
+class Planilha
 {
 	
 
