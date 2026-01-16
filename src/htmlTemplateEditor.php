@@ -1,10 +1,8 @@
 <?php
-<<<<<<< HEAD:controle/htmlTemplateEditor.php
-=======
+
 namespace Carta;
 
 
->>>>>>> origin/main:src/htmlTemplateEditor.php
 class HtmlTemplateEditor
 {
     private string $filePath;

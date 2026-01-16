@@ -1,15 +1,7 @@
 <?php
-<<<<<<< HEAD:controle/conecta.php
-	//include_once 'constantes.php';
-	//include_once 'auto_load.class.php';
-	//new auto_load();
-require 'vendor/autoload.php';
-=======
-namespace Carta;
->>>>>>> origin/main:src/conecta.php
-	
 
-	//class conecta extends PDO{
+namespace Carta;
+	
 	class conecta{
 
 		protected $host, $senha, $usuario, $conexao, $bancoDados;
@@ -133,10 +125,8 @@ namespace Carta;
 
 
 
-<<<<<<< HEAD:controle/conecta.php
-	}//CLASS CONECTA - PDO
-=======
-	}// CLASS CONECTA - PDO
->>>>>>> origin/main:src/conecta.php
+
+	}
+
 
 ?>

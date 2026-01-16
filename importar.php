@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             if($upload = $arquivos->upload($nomeArquivo, $nomeArquivoTemporario)){
                 
                 if($devolucao = $planilha->ler(UPLOAD_DIR."/".$nomeArquivo)){
-                    echo "Aqui";
+                    //echo "Aqui";
                     var_dump($devolucao);
                     unlink(UPLOAD_DIR."/".$nomeArquivo);
 

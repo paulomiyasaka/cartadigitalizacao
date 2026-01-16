@@ -8,7 +8,7 @@ include 'menu_top.php';
 
  <body>
 <?php
-include 'conteudo_index.php';
+include 'conteudo_conferir.php';
 
 include 'footer.php';
 ?>
