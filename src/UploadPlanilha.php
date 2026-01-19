@@ -2,22 +2,17 @@
 
 namespace Carta;
 
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\IReader;
+
+
 /**
  * 
  */
 class UploadPlanilha{
-	/*
-	protected $variavel = array();
 
-	public function __set($variavel, $valor){
-		$this->variavel[$variavel] = $valor;
-	}
-
-	public function __get($variavel){
-		return $this->variavel[$variavel];
-	
-	}
-	*/
 	private string $nomeArquivo;
 	private string $nomeArquivoTemporario;
 	private string $diretorio;
@@ -72,6 +67,9 @@ class UploadPlanilha{
 
 
 	}//upload
+
+
+	
 
 
 
