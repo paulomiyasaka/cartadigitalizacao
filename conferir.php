@@ -10,10 +10,11 @@ include 'menuTop.php';
   
 <?php
 include 'view/conteudoConferir.php';
+include 'view/modalResposta.php';
 
 include 'footer.php';
 ?>
-
+<script type="module" src="js/consultarCaixa.js"></script>
 
   </body>
 </html>

@@ -11,9 +11,17 @@ class FuncoesSQL extends conecta{
 		
 		$query = conecta::executarSQL($sql, $dados);
 		//$resultado = $query->fetch(PDO::FETCH_OBJ);
-		$row = $query->rowCount();
-		if($row > 0){
-			return TRUE;
+		
+		//$row = $query->rowCount();
+		//if($row > 0){
+		if($query){
+			$row = $query->rowCount();
+			if($row > 0){				
+				return TRUE;
+			}else{
+				return FALSE;
+			}
+			
 		}else{
 			return FALSE;
 		}

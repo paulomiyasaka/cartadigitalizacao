@@ -32,12 +32,13 @@ protected function conecta(){
 		$password = $this->senha;
 		
 		$this->conexao = new PDO($dsn, $user, $password);
-		return $this->conexao;
+		//return $this->conexao;
 		
 		
 		
 	} catch (PDOException  $e) {
-	    return $e->getMessage();
+	    //return $e->getMessage();
+	    return false;
 	}
 
 
