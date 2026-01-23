@@ -19,16 +19,16 @@ if (modalErro) {
 }
 
 
-document.querySelector('form').addEventListener('submit', function(e) {
+document.querySelector('form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const tabelaInput = document.getElementById('tabela');
+    //const tabelaInput = document.getElementById('tabela');
     const arquivoInput = document.getElementById('file');
     const formData = new FormData();
     
     // Adiciona o arquivo ao objeto FormData
     formData.append('file', arquivoInput.files[0]);
-    formData.append('tabela', tabelaInput.value);
+    //formData.append('tabela', tabelaInput.value);
 
 
     const botao = document.querySelector('button');
@@ -38,11 +38,11 @@ document.querySelector('form').addEventListener('submit', function(e) {
     
     
     // Envia para o controller PHP
-    fetch('src/controller/importar.php', {
+    await fetch('src/controller/importar.php', {
         method: 'POST',
         body: formData
     })
-    //.then(response => response.json()) // Espera um retorno JSON
+    //.then(response => response.json() ) // Espera um retorno JSON    
     .then(response => {
         // Verifica se o servidor respondeu com status 200-299
         if (!response.ok) {
@@ -52,9 +52,10 @@ document.querySelector('form').addEventListener('submit', function(e) {
         return response.text(); // Primeiro pegamos como texto para depurar se necessário
     })
     .then(data => {
-
+        console.log(data);
         let objetoData = (typeof data === 'string') ? JSON.parse(data) : data;
         console.log("Retorno: ", objetoData.resultado);
+
 
         if (objetoData.resultado) {            
             //document.getElementById('resultado').innerHTML = "✅ Upload realizado com sucesso!";
@@ -72,7 +73,8 @@ document.querySelector('form').addEventListener('submit', function(e) {
     .catch(error => {
         console.error('Erro:', error);
         //document.getElementById('resultado').innerHTML = "❌ Erro na comunicação com o servidor.";
-        modalResposta('modal_falso', 'show', 'msg_erro', 'Verificar o nome da tabela, os atributos e as chaves primárias.');
+        //modalResposta('modal_falso', 'show', 'msg_erro', error);
+        modalResposta('modal_falso', 'show', 'msg_erro', 'Verifique o nome da tabela e dos atributos, também confira se há registros duplicados para a chave primária.');
     })
     .finally(() => {
         // Isso executa independente de dar erro ou sucesso

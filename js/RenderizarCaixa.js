@@ -4,10 +4,6 @@ export class RenderizarCaixa {
         this.corpo = document.getElementById(idCorpo);
     }
 
-    /**
-     * Limpa e preenche a tabela com os dados recebidos
-     * @param {Object} dadosCaixa - Objeto contendo descricao, data_criacao, etc.
-     */
     exibirDados(dadosCaixa) {
         // Limpa o conteúdo anterior
         this.corpo.innerHTML = '';

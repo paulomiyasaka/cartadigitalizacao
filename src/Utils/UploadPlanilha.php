@@ -2,7 +2,6 @@
 
 namespace Carta\Utils;
 
-require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\IReader;

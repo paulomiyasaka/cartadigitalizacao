@@ -1,12 +1,13 @@
 <?php
 
-namespace Carta\Services;
+namespace Carta\Utils;
 
-require 'vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 use Carta\Utils\UploadPlanilha; 
 use Carta\Utils\LerPlanilha;
 use Carta\Utils\Funcoes;
+use Carta\Utils\ApagarPlanilha;
 use Carta\Database\FuncoesSQL;
 
 class SalvarDados
@@ -14,18 +15,17 @@ class SalvarDados
 	private string $nomeArquivo;
 	private string $nomeArquivoTemporario;
 	private string $caminho;
-    private string $tabela;   
     private bool $error;   
     private int $registrosSalvos; 
 	
-	public function __construct(string $nomeArquivo, string $nomeArquivoTemporario, string $caminho, string $tabela)
+	public function __construct(string $nomeArquivo, string $nomeArquivoTemporario, string $caminho)
 	{
 
     	$this->nomeArquivo = $nomeArquivo;
     	$this->nomeArquivoTemporario = $nomeArquivoTemporario;
     	$this->caminho = $caminho;
-        $this->tabela = $tabela;
-        //atribuido true para ser alterado para false quando ocorrer erro
+
+        //Deverá ser alterado para false quando ocorrer erro
         //retornar false no método __toString()
         $this->error = true;
     	$this->salvar();
@@ -38,7 +38,9 @@ class SalvarDados
 	$nomeArquivo = $this->nomeArquivo;
 	$nomeArquivoTemporario = $this->nomeArquivoTemporario;
 	$caminho = $this->caminho;
-    $tabela = $this->tabela;
+    //remover a extensão .xslx do nome do arquivo.
+    $tabela = explode(".", $nomeArquivo);
+    $tabela = $tabela[0];
 
 	$planilha = new UploadPlanilha($nomeArquivo, $nomeArquivoTemporario, $caminho);
 
@@ -52,6 +54,7 @@ class SalvarDados
         if($dadosPlanilha = new LerPlanilha($nomeArquivo, $caminho)){
             //echo "Aqui";
             //var_dump($dadosPlanilha);
+            $apagarPlanilha = new ApagarPlanilha($nomeArquivo, $caminho);
             $conecta = new FuncoesSQL();
 
             foreach ($dadosPlanilha as $linhas) {
@@ -105,18 +108,6 @@ class SalvarDados
 
                         }
                         
-
-                        //var_dump($converterCelula);
-                        //var_dump($celula);
-                        //exit;
-                        
-                        /*
-                        $converterCelula = match(true) {
-                            is_int($celula) => $celula = $funcoes->somenteNumeros($celula),
-                            is_string($celula) => $celula = $funcoes->maiuscula($celula)
-                        };
-                        */
-                        
                         $dados = array_combine($parametrosExplode, $celula);
                         
                         $sql = "INSERT INTO {$tabela} ($cabecalho) VALUES ($parametroCabecalho)";
@@ -137,7 +128,7 @@ class SalvarDados
             }//foreach $dadosPlanilha
 
             
-            unlink(UPLOAD_DIR."/".$nomeArquivo);
+            
             $this->registrosSalvos = $registrosSalvos;
             //echo "Arquivo excluído: ".$nomeArquivo;
             //echo "Linhas registradas: ".$registrosSalvos;                
@@ -145,14 +136,14 @@ class SalvarDados
             
 
         }else{ //ler o arquivo do upload
-            //echo "Não foi possível ler o arquivo: ".UPLOAD_DIR."/".$nomeArquivo;
+            echo "Não foi possível ler o arquivo: ".UPLOAD_DIR."/".$nomeArquivo;
             //return false;
             $this->error = false;
         }
 
     
     }else{
-        //echo "Erro ao tentar fazer o upload do arquivo.";
+        echo "Erro ao tentar fazer o upload do arquivo.";
         //return false;
         $this->error = false;
 
@@ -171,9 +162,6 @@ class SalvarDados
         }
 
     }
-
-
-
 
 
 

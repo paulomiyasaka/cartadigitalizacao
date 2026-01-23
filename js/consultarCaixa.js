@@ -3,18 +3,18 @@ import { modalResposta } from './funcoesModal.js';
 
 // Instancia a classe passando os IDs do HTML
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
-const inputCaixa = document.getElementById('codigoCaixa');
+const inputCaixa = document.getElementById('codigo_caixa');
 
-inputCaixa.addEventListener('input', function() {
+inputCaixa.addEventListener('input', async function() {
     const codigo = this.value;
     const formData = new FormData();
     
     // Adiciona o arquivo ao objeto FormData
-    formData.append('codigoCaixa', codigo);
+    formData.append('codigo_caixa', codigo);
 
     if (codigo.length === 5) {
 
-        fetch('src/controller/buscarCaixa.php?codigo=${codigo}', {
+        await fetch('src/controller/buscarCaixa.php?codigo=${codigo}', {
             method: 'POST',
             body: formData
         })

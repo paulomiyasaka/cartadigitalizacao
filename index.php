@@ -8,7 +8,7 @@ include 'menuTop.php';
 
 <body>
 <?php
-include 'view/conteudoIndex.php';
+include 'view/conteudoUpload.php';
 include 'view/modalResposta.php';
 
 include 'footer.php';

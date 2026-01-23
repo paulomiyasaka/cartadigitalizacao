@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$codigo = $_POST['codigoCaixa'] ?? '';
+$codigo = $_POST['codigo_caixa'] ?? '';
 $retorno = ['resultado' => $codigo, 'caixa' => null];
 
 if (strlen($codigo) === 5) {
