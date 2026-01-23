@@ -1,4 +1,4 @@
-import { modalResposta, atualizarPagina, formReset } from './funcoesModal.js';
+import { modalResposta, atualizarPagina, formReset, bloquearSubmit } from './funcoesModal.js';
 
 
 const modalSucesso = document.getElementById('modal_verdadeiro');
@@ -20,7 +20,7 @@ if (modalErro) {
 
 
 document.querySelector('form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+    bloquearSubmit(e);
 
     //const tabelaInput = document.getElementById('tabela');
     const arquivoInput = document.getElementById('file');

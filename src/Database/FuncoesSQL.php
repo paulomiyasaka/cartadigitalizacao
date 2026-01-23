@@ -2,7 +2,7 @@
 namespace Carta\Database;
 
 use Carta\Database\FuncoesSQL;
-
+use \PDO;
 
 class FuncoesSQL extends conecta{
 

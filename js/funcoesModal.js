@@ -33,3 +33,7 @@ export function formReset(){
 	document.getElementsByTagName("form")[0].reset();
 
 }
+
+export function bloquearSubmit(e){
+    e.preventDefault();    
+}

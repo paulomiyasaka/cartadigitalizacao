@@ -1,31 +1,28 @@
 <?php
+ob_clean();
 header('Content-Type: application/json; charset=utf-8');
 
+require '../../vendor/autoload.php';
+
+use Carta\Utils\ConsultarCaixa;
+
 $codigo = $_POST['codigo_caixa'] ?? '';
-$retorno = ['resultado' => $codigo, 'caixa' => null];
+$retorno = ['resultado' => false, 'caixa' => null];
 
 if (strlen($codigo) === 5) {
-    // Exemplo de conexão PDO
-    // $stmt = $pdo->prepare("SELECT descricao, data_criacao, responsavel FROM caixas WHERE codigo = ?");
-    // $stmt->execute([$codigo]);
-    // $caixa = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Simulação de retorno do banco:
-    $caixa = [
-        'descricao' => 'Documentos Contábeis 2023',
-        'data_criacao' => '15/05/2023',
-        'responsavel' => 'Setor Financeiro'
-    ];
-
-
-
-    if ($caixa) {
-        $retorno['resultado'] = true;
-        $retorno['caixa'] = $caixa;
+    
+    //$consultarCaixa = new ConsultarCaixa($codigo);
+    $consulta = new ConsultarCaixa($codigo);
+    $consultarCaixa = $consulta->consultar();
+    //echo json_encode($consultarCaixa);
+    //var_dump($consultarCaixa);
+    //exit;
+    if($consultarCaixa !== NULL) {
+        $retorno['resultado'] = TRUE;
+        $retorno['caixa'] = $consultarCaixa;
     }
 }
 
-//echo json_encode($retorno);
 echo json_encode($retorno);
 
 ?>
