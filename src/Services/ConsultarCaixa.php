@@ -1,6 +1,6 @@
 <?php
 
-namespace Carta\Utils;
+namespace Carta\Services;
 
 require '../../vendor/autoload.php';
 
@@ -23,7 +23,26 @@ class ConsultarCaixa{
 
 		$numeroCaixa = $this->numeroCaixa;
 		$funcoesSQL = new funcoesSQL();
-		$sql = "SELECT ar.numero_caixa, ar.sigla_cliente, c.nome as nome_cliente, ar.quantidade_lotes, ar.quantidade_objetos, ar.lote_cliente_inicial, ar.lote_cliente_final, ar.situacao, ar.gerar_etiqueta FROM tb_armazenamento_ar as ar LEFT JOIN tb_cliente as c ON c.sigla_cliente = ar.sigla_cliente WHERE ar.numero_caixa = :numero_caixa";
+		$sql = "SELECT 
+			ar.numero_caixa, 
+			ar.sigla_cliente, 
+			c.nome as nome_cliente, 
+			c.codigo_cliente, 
+			ar.quantidade_lotes, 
+			ar.quantidade_objetos, 
+			ar.lote_cliente_inicial, 
+			ar.lote_cliente_final, 
+			ar.situacao, 
+			ar.gerar_etiqueta, 
+			ar.quebra_sequencia, 
+			ar.solicitar_correcao,		
+			c.armazenar, 
+			c.prazo_armazenamento,
+			c.fragmentar 
+			FROM tb_armazenamento_ar as ar 
+			LEFT JOIN tb_cliente as c ON 
+			c.sigla_cliente = ar.sigla_cliente 
+			WHERE ar.numero_caixa = :numero_caixa";
 
 		$dados = array(":numero_caixa" => $numeroCaixa);
 		$resultado = $funcoesSQL->fetchAllSQL($sql, $dados);
@@ -35,9 +54,7 @@ class ConsultarCaixa{
             return null;
         }
 
-        // Se retornou, transformamos o array de 18+ campos em um Objeto DTO
         return CaixaAR::fromArray($resultado);
-        //return $resultado;
 		
 
 	}

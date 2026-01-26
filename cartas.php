@@ -2,7 +2,18 @@
 <html lang="pt-BR">
 
 <?php
+include 'vendor/autoload.php';
 include 'header.php';
+use Carta\Utils\Validacoes;
+
+$validacoes = new Validacoes();
+//$validacoes->validar();
+$validacoes->interromperReenvioFormulario();
+$validacoes->verificarUsuarioLogado();
+$usuario['perfil'] = $_SESSION['perfil_usuario'];
+$usuario['nome'] = $_SESSION['nome'];
+$usuario['matricula'] = $_SESSION['matricula'];
+$usuario['se'] = $_SESSION['se_usuario'];
 include 'menuTop.php';
 ?>
 
@@ -10,7 +21,7 @@ include 'menuTop.php';
   
 <?php
 include 'view/conteudoCartas.php';
-
+include 'scripts.html';
 include 'footer.php';
 ?>
 

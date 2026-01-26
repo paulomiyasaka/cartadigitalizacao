@@ -1,30 +1,35 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit(); 
-}
-
-
-?>
-
 <!doctype html>
 <html lang="pt-BR">
 
 <?php
+include 'vendor/autoload.php';
 include 'header.php';
+use Carta\Utils\Validacoes;
 
+$validacoes = new Validacoes();
+//$validacoes->validar();
+$validacoes->interromperReenvioFormulario();
+$validacoes->verificarUsuarioLogado();
+$usuario['perfil'] = $_SESSION['perfil_usuario'];
+$usuario['nome'] = $_SESSION['nome'];
+$usuario['matricula'] = $_SESSION['matricula'];
+$usuario['se'] = $_SESSION['se_usuario'];
 include 'menuTop.php';
 ?>
 
- <body>
+<body>
   
 <?php
 include 'view/conteudoConferir.php';
 include 'view/modalResposta.php';
-
+include 'view/modalCorrigirCaixa.php';
+include 'view/modalAlterarQuebraSequencia.php';
+include 'scripts.html';
 include 'footer.php';
 ?>
 <script type="module" src="js/consultarCaixa.js"></script>
+<script type="module" src="js/alterarQuebraSequencia.js"></script>
+<script type="module" src="js/tempoLogout.js"></script>
 
   </body>
 </html>

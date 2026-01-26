@@ -1,57 +1,61 @@
   <div class="container">
 
     <div class="row justify-content-center align-middle p-5">
-      <div class="col-4 text-center">
+      <div class="col-6 text-center">
         <h2>Conferência dos lotes armazenados</h2>
         <form method="post">
           <div class="text-center">
             <!-- <input type="number" id="numero_caixa" name="numero_caixa" class="form-control text-center" aria-describedby="CaixaHelpBlock" required> -->
             <div class="form-check">
-            <input type="text" id="codigo_caixa" name="codigo_caixa" class="text-center form-control" maxlength="5" autocomplete="off" aria-describedby="CaixaHelpBlock" required>
-            <div id="CaixaHelpBlock" class="form-text">
-              Informe os dígitos da caixa no campo acima.<br>
-              É necessário a conferência dos lotes armazenados antes de gerar a carta de devolução.
+              <input type="number" id="codigo_caixa" name="codigo_caixa" class="text-center form-control mx-auto" maxlength="5" style="width: 200px;" autocomplete="off" aria-describedby="CaixaHelpBlock" autofocus required>
+              <div id="CaixaHelpBlock" class="form-text">
+                Informe os dígitos da caixa no campo acima.<br>
+                É necessário a conferência dos lotes armazenados antes de gerar a carta de devolução.
+              </div>
             </div>
           </div>
-            <div class="form-check" style="display: none;" >
-              <button type="submit" class="btn btn-outline-success">Conferir</button>  
-            </div>            
-          </div>  
-        </form>     
+        </form>
+        <div class="text-center">
+          <div id="btns_conferencia" class="form-check d-flex invisible" >
+            <button type="button" class="btn btn-danger m-1">Solicitar Correção</button>
+             
+            <button type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_alterar_quebra_sequencia">Alterar Quebra de Sequência</button>              
+
+            <button type="button" class="btn btn-outline-primary m-1">Confirmar e gerar carta</button> 
+            
+            <button type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_corrigir">Corrigir Informações</button> 
+          </div>
+        </div>
       </div>
-    </div>
+    </div>  
+
 
     <div class="row">
-      <div class="col">
-        <table class="table table-striped mt-3 alert alert-primary text-center" id="tabelaConferencia" style="display: none;">
-            <thead>
-              <tr>
-                <th scope="col" colspan="7" class="fs-3">Dados para conferência:</th>
-              </tr>
-              <tr>
-                <th scope="col">Nº Caixa</th>
-                <th scope="col">Sigla Cliente</th>
-                <th scope="col">Nome Cliente</th>
-                <th scope="col">Quantidade de Lotes</th>
-                <th scope="col">Quantidade de ARs</th>
-                <th scope="col">Lote Inicial Cliente</th>
-                <th scope="col">Lote Final Cliente</th>
-              </tr>
-            </thead>
-            <tbody id="corpoTabelaCaixa">
-              <tr>
-                <th scope="row">1234</th>
-                <td>ABC</td>
-                <td>Cliente de Contrato com os Correios</td>
-                <td>10</td>
-                <td>1.234</td>
-                <td>26001200</td>
-                <td>26001234</td>
-              </tr>              
-            </tbody>
-          </table>
-        
+      <div class="col-12">
+        <div class="row">
+          <div class="col">
+            <table class="table table-striped mt-3 alert alert-primary text-center" id="tabelaConferencia" style="display: none;">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="9" class="fs-3">Dados para conferência:</th>
+                </tr>
+                <tr>
+                  <th scope="col">Nº Caixa</th>
+                  <th scope="col">Sigla Cliente</th>
+                  <th scope="col">Nome Cliente</th>
+                  <th scope="col">Código Cliente</th>
+                  <th scope="col">Quantidade de Lotes</th>
+                  <th scope="col">Quantidade de ARs</th>
+                  <th scope="col">Lote Inicial Cliente</th>
+                  <th scope="col">Lote Final Cliente</th>
+                  <th scope="col">Quebra de Sequência</th>
+                </tr>
+              </thead>
+              <tbody id="corpoTabelaCaixa" class="fs-5">                                 
+              </tbody>
+            </table>        
+          </div>
+        </div>
       </div>
     </div>
-
   </div>

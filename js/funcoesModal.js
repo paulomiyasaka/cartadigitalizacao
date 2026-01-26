@@ -37,3 +37,29 @@ export function formReset(){
 export function bloquearSubmit(e){
     e.preventDefault();    
 }
+
+export function focusInput(idInput){
+	const input = document.getElementById(idInput);
+	input.focus();
+}
+
+export function hiddenModal(idModal, idInput){
+	const modalErro = document.getElementById(idModal);
+	if (modalErro) {
+	    modalErro.addEventListener('hidden.bs.modal', () => {
+	        //console.log('Modal de erro fechado. O usuário pode tentar corrigir os dados.');
+	        //window.location.reload();
+	        focusInput(idInput);
+	    });
+	}
+}
+
+
+export function voltar(){
+	window.history.back();
+}
+
+
+export function url(url){
+	location.href=url;
+}

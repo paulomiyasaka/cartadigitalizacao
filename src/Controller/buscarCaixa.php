@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 require '../../vendor/autoload.php';
 
-use Carta\Utils\ConsultarCaixa;
+use Carta\Services\ConsultarCaixa;
 
 $codigo = $_POST['codigo_caixa'] ?? '';
 $retorno = ['resultado' => false, 'caixa' => null];

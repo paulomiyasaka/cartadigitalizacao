@@ -1,4 +1,4 @@
-export class RenderizarCaixa {
+export class InformarSolicitacaoCorrecao {
     constructor(idTabela, idCorpo) {
         this.tabela = document.getElementById(idTabela);
         this.corpo = document.getElementById(idCorpo);
@@ -7,14 +7,14 @@ export class RenderizarCaixa {
     exibirDados(dadosCaixa) {
         this.corpo.innerHTML = '';
 
-        const tr = document.createElement('tr');
+        const linha = document.createElement('tr');
 
         // Defina a ordem exata das propriedades conforme o seu <thead>
         const chaves = [
             'numeroCaixa', 
             'siglaCliente', 
             'nomeCliente', 
-            'codigoCliente', 
+            'codigoCliente',
             'quantidadeLotes', 
             'quantidadeObjetos', // adicionei conforme seu HTML anterior
             'loteClienteInicial', 
@@ -22,19 +22,12 @@ export class RenderizarCaixa {
             'quebraSequencia'
         ];
 
-        chaves.forEach((chave, index) => {
-            // Cria 'th' para a primeira coluna (Nº Caixa) e 'td' para as demais
-            const celula = document.createElement(index === 0 ? 'th' : 'td');
-            
-            // Garante que não apareça "undefined" se o campo estiver vazio
-            celula.textContent = dadosCaixa[chave] ?? ''; 
-            
-            if (index === 0) celula.scope = "row"; // Boa prática para acessibilidade em <th>
-            
-            tr.appendChild(celula);
-        });
+        const celula = document.createElement('th');
+        celula.setAttribute('colspan','9');
+        celula.textContent = "Verifique se é necessária a correção dos dados da caixa número: "+dadosCaixa['numeroCaixa']+"";
+        linha.appendChild(celula);
 
-        this.corpo.appendChild(tr);
+        this.corpo.appendChild(linha);
         this.tabela.style.display = 'table';
     }   
 

@@ -3,27 +3,24 @@ import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
 import { modalResposta, bloquearSubmit, formReset, focusInput, hiddenModal } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
 
-const inputCaixa = document.getElementById('codigo_caixa');
+const formQuebraSequencia = document.getElementById('form_alterar_quebra_sequencia');
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
+const notificacao = new RenderizarToast();
 
+formQuebraSequencia.addEventListener('submit', async function(e) {
+    bloquearSubmit(e);
 
-inputCaixa.addEventListener('input', async function() {
-    //bloquearSubmit(e);
-
-    const codigo = this.value;
+    const codigo = document.getElementById('codigo_caixa').value;
+    const quebra = document.getElementById('alterar_quebra_sequencia').value;
     const formData = new FormData();
     const btns_conferencia = document.getElementById('btns_conferencia');
-    const url = 'src/controller/buscarCaixa.php';
-
     btns_conferencia.setAttribute('class','invisible');
     //console.log(codigo);
     // Adiciona o arquivo ao objeto FormData
     formData.append('codigo_caixa', codigo);
+    formData.append('alterar_quebra_sequencia', quebra);
 
-    //tabelaConferencia(viewCaixa, codigo, url, formData);
-    if (codigo.length === 5) {
-
-        await fetch('src/controller/buscarCaixa.php', {
+        await fetch('src/controller/alterarQuebraSequencia.php', {
             method: 'POST',
             body: formData
         })
@@ -54,8 +51,7 @@ inputCaixa.addEventListener('input', async function() {
                     
                 } else {
                     viewCaixa.ocultarTabela();                   
-                    formReset();    
-                    const notificacao = new RenderizarToast();                                    
+                    formReset();                                        
                     notificacao.exibir(`Caixa número ${codigo} não foi encontrada!`, "danger");
                     focusInput();
                     //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');
@@ -66,10 +62,5 @@ inputCaixa.addEventListener('input', async function() {
                 //console.error('Erro:', error);
                 viewCaixa.ocultarTabela();
             });
-    } else {
-        viewCaixa.ocultarTabela();
-
-    }
-
-
+    
 });

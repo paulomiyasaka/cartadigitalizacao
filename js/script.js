@@ -1,16 +1,20 @@
-export function habilitarTooltip(){
-	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  		return new bootstrap.Tooltip(tooltipTriggerEl)
-	});
+import { habilitarTooltip, habilitarDropdown } from './funcoesAutoLoad.js';
+import { RenderizarToast } from './RenderizarToast.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Joga a inicialização para o final da fila de tarefas
+    setTimeout(() => {
+        habilitarTooltip();
+        habilitarDropdown();
+
+    }, 0);
+});
 
 
-}
 
-export function habilitarDropdown(){
 
-	const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
-	const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
 
-}
+
+
+
 
