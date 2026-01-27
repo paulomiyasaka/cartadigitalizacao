@@ -16,15 +16,14 @@ class GetSession
         }
 
         $dados = [
-            'matricula'      => $_SESSION['matricula'],
+            'matricula'      => (int) $_SESSION['matricula'],
             'nome'           => $_SESSION['nome'],
             'se'     => $_SESSION['se_usuario'],
             'perfil' => $_SESSION['perfil_usuario'],
-            'usuario_logado' => $_SESSION['usuario_logado'],
-            'hora_login'     => $_SESSION['hora_login']
+            'usuarioLogado' => $_SESSION['usuario_logado'],
+            'horaLogin'     => $_SESSION['hora_login']
         ];
 
-        // 3. O fromArray recebe o array pronto
         return UsuarioSessao::fromArray($dados);
 
 

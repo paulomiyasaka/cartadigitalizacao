@@ -17,7 +17,7 @@
         </form>
         <div class="text-center pt-2">
           <div id="btns_conferencia" class="form-check d-flex invisible" >
-            <button id="btn_correcao_caixa" type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modal_alerta">Solicitar Correção da Caixa</button>
+            <button id="btn_correcao_caixa" type="button" class="btn btn-outline-danger m-1" data-solicitar="true" data-bs-toggle="modal" data-bs-target="#modal_alerta">Solicitar Correção da Caixa</button>
              
             <button id="btn_alterar_quebra_sequencia" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_alterar_quebra_sequencia">Alterar Quebra de Sequência</button>     
 

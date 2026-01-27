@@ -6,21 +6,33 @@ require '../../vendor/autoload.php';
 
 use Carta\Utils\GetSession;
 
-$matricula = $_POST['matricula'] ?? '';
-
 $retorno = ['resultado' => false, 'sessao' => null];
-
-if (strlen($matricula) === 8) {
     
-    $sessao = new GetSession();
-    $usuario = $sessao->retonarSessao();
+$sessao = new GetSession();
+$usuario = $sessao->retornarSessao();
+/*
+if($usuario['usuarioLogado']) {
+    $retorno['resultado'] = TRUE;
+    $retorno['sessao'] = $usuario;
+}
+*/
+if ($usuario) {
+    $retorno = [
+        'resultado' => true,
+        'sessao' => [
+            'matricula' => $usuario->matricula,
+            'nome'      => $usuario->nome,
+            'se'        => $usuario->se,
+            'perfil'    => $usuario->perfil,
+            'usuario'   => $usuario->usuarioLogado,
+            'hora'      => $usuario->horaLogin
+        ]
+    ];
     
-    if($usuario['usuario_logado']) {
-        $retorno['resultado'] = TRUE;
-        $retorno['sessao'] = $usuario;
-    }
 }
 
+//var_dump($usuario);
+//exit();
 echo json_encode($retorno);
 
 ?>

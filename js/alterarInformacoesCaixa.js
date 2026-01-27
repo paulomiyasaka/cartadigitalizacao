@@ -54,8 +54,26 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 if (objetoData.resultado) {
                     
                     if(objetoData.caixa['solicitarCorrecao'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
-                        const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
-                        tabelaCorrecao.exibirDados(objetoData.caixa);                       
+                        
+                        getSession().then(session => {
+                            if (session) {
+                                const permissaoBTN = session['perfil'];
+                                //console.log("Permissão: "+permissaoBTN);
+                                if(permissaoBTN === 'ADMINISTRADOR' || permissaoBTN === 'GESTOR'){
+                                    btns_conferencia.removeAttribute('class','invisible');
+                                    viewCaixa.exibirDados(objetoData.caixa);
+                                }else{
+                                    const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
+                                    tabelaCorrecao.exibirDados(objetoData.caixa); 
+                                }
+                                
+                            }
+                        });
+
+
+                        //const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
+                        //tabelaCorrecao.exibirDados(objetoData.caixa); 
+
                     }else if(objetoData.caixa['solicitarCorrecao'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
                         btns_conferencia.removeAttribute('class','invisible');
                         viewCaixa.exibirDados(objetoData.caixa);
