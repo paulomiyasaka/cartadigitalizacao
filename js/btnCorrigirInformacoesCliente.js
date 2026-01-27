@@ -10,22 +10,22 @@ botaoAlterar.addEventListener('click', function() {
     const textoNomeCliente = tabela.rows[2].cells[2].innerText;
 
     const textoArmazenar = tabela.rows[2].cells[9].innerText;
-    const armazenar = document.getElementById('alterar_cliente_armazenar');
+    const armazenar = document.getElementById('corrigir_cliente_armazenar');
     armazenar.value = textoArmazenar;
 
     const textoPrazoArmazenamento = tabela.rows[2].cells[10].innerText;
-    const prazoArmazenamento = document.getElementById('alterar_cliente_prazo_armazenamento');
+    const prazoArmazenamento = document.getElementById('corrigir_cliente_prazo_armazenamento');
     prazoArmazenamento.value = textoPrazoArmazenamento;
 
     const textoFragmentar = tabela.rows[2].cells[11].innerText;
-    const fragmentar = document.getElementById('alterar_cliente_fragmentar');
+    const fragmentar = document.getElementById('corrigir_cliente_fragmentar');
     fragmentar.value = textoFragmentar;
 
 
 
     const tituloModal = document.getElementById('titulo_modal_alterar_cliente');
     tituloModal.innerText = '';
-    tituloModal.innerText = `Corrigir informações do Cliente:\n ${textoNomeCliente} - ${textoSiglaCliente}`;
+    tituloModal.innerText = `Corrigir informações\n Cliente: ${textoNomeCliente} - Sigla: ${textoSiglaCliente}`;
     //focusInput('alterar_quebra_sequencia');
     
     // 4. Lógica para abrir seu modal (exemplo)

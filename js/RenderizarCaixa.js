@@ -6,7 +6,7 @@ export class RenderizarCaixa {
 
     exibirDados(dadosCaixa) {
         this.corpo.innerHTML = '';
-
+        let codigo = 0;
         const tr = document.createElement('tr');
 
         // Defina a ordem exata das propriedades conforme o seu <thead>
@@ -28,7 +28,9 @@ export class RenderizarCaixa {
         chaves.forEach((chave, index) => {
             // Cria 'th' para a primeira coluna (Nº Caixa) e 'td' para as demais
             const celula = document.createElement(index === 0 ? 'th' : 'td');
-            
+            if(chave === 'numeroCaixa'){
+                codigo = dadosCaixa['numeroCaixa'];
+            }
             // Garante que não apareça "undefined" se o campo estiver vazio
             celula.textContent = dadosCaixa[chave] ?? ''; 
             
@@ -38,6 +40,8 @@ export class RenderizarCaixa {
         });
 
         this.corpo.appendChild(tr);
+        const titulo = document.getElementById('titulo_tabela_caixa');
+        titulo.innerText = `Conferência da caixa número: ${codigo}` ;
         this.tabela.style.display = 'table';
     }   
 

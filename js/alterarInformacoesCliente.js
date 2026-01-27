@@ -2,13 +2,14 @@ import { RenderizarCaixa } from './RenderizarCaixa.js';
 import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
 import { modalResposta, bloquearSubmit, formReset, focusInput } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
+import { getSession } from './retornarSessao.js';
 
-const formQuebraSequencia = document.getElementById('form_corrigir_caixa');
+const formAlterarCliente = document.getElementById('form_alterar_dados_cliente');
 
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
 const notificacao = new RenderizarToast();
 
-formQuebraSequencia.addEventListener('submit', async function(e) {
+formAlterarCliente.addEventListener('submit', async function(e) {
     bloquearSubmit(e);
 
     const aguarde = document.getElementById('aguarde');
@@ -16,25 +17,25 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
     aguarde.setAttribute('class', 'visible');
 
     const codigo = document.getElementById('codigo_caixa').value;
-    const corrigirCaixaQuantidadeLotes = document.getElementById('corrigir_caixa_quantidade_lotes').value;
-    const corrigirCaixaQuantidadeObjetos = document.getElementById('corrigir_caixa_quantidade_objetos').value;
-    const corrigirCaixaLoteClienteInicial = document.getElementById('corrigir_caixa_lote_cliente_inicial').value;
-    const corrigirCaixaLoteClienteFinal = document.getElementById('corrigir_caixa_lote_cliente_final').value;
-    const corrigirCaixaQuebraSequencia = document.getElementById('corrigir_caixa_quebra_sequencia').value;
-
+    const tabela = document.getElementById('tabelaConferencia');
+    const siglaCliente = tabela.rows[2].cells[1].innerText;
+    const nomeCliente = tabela.rows[2].cells[2].innerText;
+    const corrigirArmazenar = document.getElementById('corrigir_cliente_armazenar').value;
+    const corrigirPrazoArmazenamento = document.getElementById('corrigir_cliente_prazo_armazenamento').value;
+    const corrigirFragmentar = document.getElementById('corrigir_cliente_fragmentar').value;
+    
     const formData = new FormData();
     const btns_conferencia = document.getElementById('btns_conferencia');
     btns_conferencia.setAttribute('class','invisible');
     console.log(codigo);
     // Adiciona o arquivo ao objeto FormData
     formData.append('codigo_caixa', codigo);
-    formData.append('corrigir_caixa_quantidade_lotes', corrigirCaixaQuantidadeLotes);
-    formData.append('corrigir_caixa_quantidade_objetos', corrigirCaixaQuantidadeObjetos);
-    formData.append('corrigir_caixa_lote_cliente_inicial', corrigirCaixaLoteClienteInicial);
-    formData.append('corrigir_caixa_lote_cliente_final', corrigirCaixaLoteClienteFinal);
-    formData.append('corrigir_caixa_quebra_sequencia', corrigirCaixaQuebraSequencia);
+    formData.append('sigla_cliente', siglaCliente);
+    formData.append('corrigir_armazenar', corrigirArmazenar);
+    formData.append('corrigir_prazo_armazenamento', corrigirPrazoArmazenamento);
+    formData.append('corrigir_fragmentar', corrigirFragmentar);
 
-        await fetch('src/controller/alterarInformacoesCaixa.php', {
+        await fetch('src/controller/alterarInformacoesCliente.php', {
             method: 'POST',
             body: formData
         })
@@ -61,7 +62,8 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                         viewCaixa.exibirDados(objetoData.caixa);
                         //const textarea = document.getElementById('alterar_quebra_sequencia');
                         //textarea.value = '';
-                        notificacao.exibir(`Dados da caixa número: ${codigo} alterados com sucesso!`, "success");
+                        getSession();
+                        notificacao.exibir(`Dados alterados com sucesso!\nCliente: ${nomeCliente} - Sigla: ${siglaCliente}`, "success");
 
                     }
                     
@@ -69,7 +71,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 } else {
                     viewCaixa.ocultarTabela();                   
                     formReset();                                        
-                    notificacao.exibir(`Erro ao tentar alterar os dados da caixa número: ${codigo}.`, "danger");
+                    notificacao.exibir(`Erro ao tentar alterar os dados do Cliente: ${siglaCliente} - Sigla: ${siglaCliente}.`, "danger");
                     focusInput();
                     //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');
                     
@@ -78,7 +80,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
             .catch(error => {
                 //console.error('Erro:', error);
                 viewCaixa.ocultarTabela();
-                //notificacao.exibir(`Não foi possível conectar ao banco para registrar a alteração da caixa número: ${codigo}.`, "danger");
+                //notificacao.exibir(`Não foi possível conectar ao banco para registrar a alteração dos dados do Cliente: ${siglaCliente} - Sigla: ${siglaCliente}.`, "danger");
             })
             .finally(() => {                
                 aguarde.removeAttribute('class', 'visible');

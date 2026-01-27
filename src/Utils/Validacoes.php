@@ -24,7 +24,7 @@ class Validacoes
 	public function verificarUsuarioLogado(): void 
 	{
 		session_start();
-			if(!isset($_SESSION['usuarioLogado']) AND $_SESSION['usuarioLogado'] !== TRUE){
+			if(!isset($_SESSION['usuario_logado']) AND $_SESSION['usuario_logado'] !== TRUE){
 				session_destroy();
 			    
 			header("Location: login.php");

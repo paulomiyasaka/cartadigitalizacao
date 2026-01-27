@@ -10,6 +10,10 @@ const notificacao = new RenderizarToast();
 formQuebraSequencia.addEventListener('submit', async function(e) {
     bloquearSubmit(e);
 
+    const aguarde = document.getElementById('aguarde');
+    aguarde.removeAttribute('class', 'invisible');
+    aguarde.setAttribute('class', 'visible');
+
     const codigo = document.getElementById('codigo_caixa').value;
     const quebra = document.getElementById('alterar_quebra_sequencia').value;
     const formData = new FormData();
@@ -65,6 +69,10 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 //console.error('Erro:', error);
                 viewCaixa.ocultarTabela();
                 //notificacao.exibir(`Não foi possível conectar ao banco para registrar a alteração da caixa número: ${codigo}.`, "danger");
+            })
+            .finally(() => {                
+                aguarde.removeAttribute('class', 'visible');
+                aguarde.setAttribute('class', 'invisible');
             });
     
 });

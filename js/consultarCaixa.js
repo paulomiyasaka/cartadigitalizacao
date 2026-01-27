@@ -6,6 +6,7 @@ import { RenderizarToast } from './RenderizarToast.js';
 const inputCaixa = document.getElementById('codigo_caixa');
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
 
+const quantidadeMaximaDigitos = 5;//caixa com 5 dígitos
 
 inputCaixa.addEventListener('input', async function() {
     //bloquearSubmit(e);
@@ -13,15 +14,21 @@ inputCaixa.addEventListener('input', async function() {
     const codigo = this.value;
     const formData = new FormData();
     const btns_conferencia = document.getElementById('btns_conferencia');
-    const url = 'src/controller/buscarCaixa.php';
+    //const url = 'src/controller/buscarCaixa.php';
 
     btns_conferencia.setAttribute('class','invisible');
     //console.log(codigo);
     // Adiciona o arquivo ao objeto FormData
     formData.append('codigo_caixa', codigo);
 
+    
+    
     //tabelaConferencia(viewCaixa, codigo, url, formData);
-    if (codigo.length === 5) {
+    if (codigo.length === quantidadeMaximaDigitos) {
+
+        const aguarde = document.getElementById('aguarde');
+        aguarde.removeAttribute('class', 'invisible');
+        aguarde.setAttribute('class', 'visible');
 
         await fetch('src/controller/buscarCaixa.php', {
             method: 'POST',
@@ -58,6 +65,8 @@ inputCaixa.addEventListener('input', async function() {
                         const idCaixa = document.getElementById('id_acao');
                         idCaixa.value = objetoData.caixa['numeroCaixa'];
 
+                        
+
                     }
                     
                     
@@ -74,9 +83,14 @@ inputCaixa.addEventListener('input', async function() {
             .catch(error => {
                 //console.error('Erro:', error);
                 viewCaixa.ocultarTabela();
+            })
+            .finally(() => {                
+                aguarde.removeAttribute('class', 'visible');
+                aguarde.setAttribute('class', 'invisible');
             });
-    }else if(codigo.length > 5){
-        formReset();
+
+    }else if(codigo.length !== quantidadeMaximaDigitos){
+        //formReset();
         focusInput('codigo_caixa');
         viewCaixa.ocultarTabela();
 

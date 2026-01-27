@@ -9,16 +9,16 @@
         <div class="col">
           <form id="form_alterar_dados_cliente" method="post">
             <div class="mb-3 w-75 mx-auto">
-              <label for="alterar_cliente_armazenar" class="form-label"><strong>Armazenar:</strong></label>
-              <select id="alterar_cliente_armazenar" name="alterar_cliente_armazenar" class="form-select text-center" aria-label="Default" required>
-                <option selected>Selecionar</option>
+              <label for="corrigir_cliente_armazenar" class="form-label"><strong>Armazenar:</strong></label>
+              <select id="corrigir_cliente_armazenar" name="corrigir_cliente_armazenar" class="form-select text-center" aria-label="Default" required>
+                <option selected disabled>Selecionar</option>
                 <option value="SIM">SIM</option>
                 <option value="NAO">NÃO</option>
               </select>
 
-              <label for="alterar_cliente_prazo_armazenamento" class="form-label mt-3"><strong>Prazo de Armazenamento:</strong></label>
-              <select id="alterar_cliente_prazo_armazenamento" name="alterar_cliente_prazo_armazenamento" class="form-select text-center" aria-label="Default" required>
-                <option selected>Selecionar</option>
+              <label for="corrigir_cliente_prazo_armazenamento" class="form-label mt-3"><strong>Prazo de Armazenamento:</strong></label>
+              <select id="corrigir_cliente_prazo_armazenamento" name="corrigir_cliente_prazo_armazenamento" class="form-select text-center" aria-label="Default" required>
+                <option selected disabled>Selecionar</option>
                 <option value="0">0</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
@@ -29,9 +29,9 @@
               </select>
 
 
-              <label for="alterar_cliente_fragmentar" class="form-label mt-3"><strong>Fragmentar:</strong></label>
-              <select id="alterar_cliente_fragmentar" name="alterar_cliente_fragmentar" class="form-select text-center" aria-label="Default" required>
-                <option selected>Selecionar</option>
+              <label for="corrigir_cliente_fragmentar" class="form-label mt-3"><strong>Fragmentar:</strong></label>
+              <select id="corrigir_cliente_fragmentar" name="corrigir_cliente_fragmentar" class="form-select text-center" aria-label="Default" required>
+                <option selected disabled>Selecionar</option>
                 <option value="SIM">SIM</option>
                 <option value="NAO">NÃO</option>
               </select>
@@ -40,7 +40,7 @@
             
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Salvar Alterações</button>
             </div>
           </form>
         </div>

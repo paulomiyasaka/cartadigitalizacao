@@ -15,7 +15,7 @@ class Login
 		$this->matricula = $matricula;
 	}
 
-	public function logar(): UsuarioLogin
+	public function logar(): ?UsuarioLogin
 	{
 		$matricula = $this->matricula;
 
@@ -48,7 +48,7 @@ class Login
         $_SESSION['se_usuario'] = $usuario->se;
         $_SESSION['perfil_usuario'] = $usuario->perfil;
 
-        $_SESSION['usuarioLogado'] = true;
+        $_SESSION['usuario_logado'] = true;
         $_SESSION['hora_login'] = time();
 
     }
