@@ -2,6 +2,7 @@ import { RenderizarCaixa } from './RenderizarCaixa.js';
 import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
 import { modalResposta, bloquearSubmit, formReset, focusInput } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
+import { getSession } from './getSession.js';
 
 const formQuebraSequencia = document.getElementById('form_corrigir_caixa');
 
@@ -34,6 +35,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
     formData.append('corrigir_caixa_lote_cliente_final', corrigirCaixaLoteClienteFinal);
     formData.append('corrigir_caixa_quebra_sequencia', corrigirCaixaQuebraSequencia);
 
+
         await fetch('src/controller/alterarInformacoesCaixa.php', {
             method: 'POST',
             body: formData
@@ -53,7 +55,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
 
                 if (objetoData.resultado) {
                     
-                    if(objetoData.caixa['corrigido'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
+                    if(objetoData.caixa['retida'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
                         
                         getSession().then(session => {
                             if (session) {
@@ -70,11 +72,13 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                             }
                         });//getSession
 
+                        notificacao.exibir(`Dados da caixa número: ${codigo} alterados com sucesso!`, "success");
+
 
                         //const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
                         //tabelaCorrecao.exibirDados(objetoData.caixa); 
 
-                    }else if(objetoData.caixa['corrigido'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
+                    }else if(objetoData.caixa['retida'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
                         btns_conferencia.classList.remove('invisible');
                         viewCaixa.exibirDados(objetoData.caixa);
                         //const textarea = document.getElementById('alterar_quebra_sequencia');
@@ -87,7 +91,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 } else {
                     //viewCaixa.ocultarTabela();                   
                     //formReset();                                        
-                    notificacao.exibir(`Erro ao tentar alterar os dados da caixa número: ${codigo}.`, "danger");
+                    notificacao.exibir(`Não foram alterados os dados da caixa número: ${codigo}.`, "danger");
                     focusInput('codigo_caixa');
                     //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');
                     btns_conferencia.classList.remove('invisible');

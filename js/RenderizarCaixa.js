@@ -4,11 +4,11 @@ export class RenderizarCaixa {
         this.corpo = document.getElementById(idCorpo);
     }
 
-    exibirDados(dadosCaixa, classe = null) {
+    exibirDados(dadosCaixa, listaClasse = null) {
         this.corpo.innerHTML = '';
         let codigo = 0;
         const tr = document.createElement('tr');
-
+        const classe = listaClasse;
         // Defina a ordem exata das propriedades conforme o seu <thead>
         const chaves = [
             'numeroCaixa', 
@@ -35,7 +35,7 @@ export class RenderizarCaixa {
             celula.textContent = dadosCaixa[chave] ?? ''; 
             
             if (index === 0) celula.scope = "row"; // Boa prática para acessibilidade em <th>
-            
+            if (index === 9 ? celula.classList.add('border-start') : '');
             if(classe !== null){
 
                 celula.classList.add(classe);    

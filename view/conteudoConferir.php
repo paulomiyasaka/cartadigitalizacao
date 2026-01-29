@@ -17,16 +17,18 @@
         </form>
         <div class="text-center pt-2">
           <div id="btns_conferencia" class="form-check d-flex invisible" >
-            <button id="btn_correcao_caixa" type="button" class="btn btn-outline-danger m-1" data-solicitar="true" data-bs-toggle="modal" data-bs-target="#modal_alerta">Solicitar Correção da Caixa</button>
-             
-            <button id="btn_alterar_quebra_sequencia" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_alterar_quebra_sequencia">Alterar Quebra de Sequência</button>     
+            
+            <button id="btn_reter_caixa" type="button" class="btn btn-outline-danger m-1" data-solicitar="true" data-bs-toggle="modal" data-bs-target="#modal_alerta">Reter Caixa</button>     
 
-            <button type="button" class="btn btn-outline-primary m-1">Confirmar para gerar carta</button> 
+            <button id="btn_confirmar_caixa" type="button" class="btn btn-outline-primary m-1">Confirmar para gerar carta</button>
+             
+            <button id="btn_alterar_quebra_sequencia" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_alterar_quebra_sequencia">Alterar Quebra de Sequência</button> 
             
             <button id="btn_corrigir_informacoes_caixa" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_corrigir_caixa">Corrigir Informações da Caixa</button> 
 
-            <button id="btn_corrigir_informacoes_cliente" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_corrigir_cliente">Corrigir Informações do Cliente</button> 
-
+            <button id="btn_corrigir_informacoes_cliente" type="button" class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#modal_corrigir_cliente">Corrigir Cadastro SGD</button> 
+            
+  
           </div>
         </div>
       </div>

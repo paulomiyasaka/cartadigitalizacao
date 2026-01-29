@@ -6,7 +6,7 @@ export class InformarSolicitacaoCorrecao {
 
     exibirDados(dadosCaixa, classe = null) {
         this.corpo.innerHTML = '';
-
+        const codigo = dadosCaixa['numeroCaixa'];
         const linha = document.createElement('tr');
 
         const celula = document.createElement('th');
@@ -19,10 +19,12 @@ export class InformarSolicitacaoCorrecao {
         }
         //celula.setAttribute('class', 'p-3');
         celula.classList.add('p-3');
-        celula.textContent = "Verifique se é necessária a correção dos dados da caixa número: "+dadosCaixa['numeroCaixa']+"";
+        celula.textContent = "O gestor precisa fazer a correção dos dados da caixa número: "+dadosCaixa['numeroCaixa'];
         linha.appendChild(celula);
 
         this.corpo.appendChild(linha);
+        const titulo = document.getElementById('titulo_tabela_caixa');
+        titulo.innerText = `Retenção da caixa número: ${codigo}` ;
         this.tabela.style.display = 'table';
     }   
 

@@ -25,7 +25,7 @@ botaoAlterar.addEventListener('click', function() {
 
     const tituloModal = document.getElementById('titulo_modal_alterar_cliente');
     tituloModal.innerText = '';
-    tituloModal.innerText = `Corrigir informações\n Cliente: ${textoNomeCliente} - Sigla: ${textoSiglaCliente}`;
+    tituloModal.innerText = `Corrigir Cadastro SGD\nCliente: ${textoNomeCliente} - Sigla: ${textoSiglaCliente}`;
     //focusInput('alterar_quebra_sequencia');
     
     // 4. Lógica para abrir seu modal (exemplo)

@@ -2,7 +2,7 @@ import { RenderizarCaixa } from './RenderizarCaixa.js';
 import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
 import { modalResposta, bloquearSubmit, formReset, focusInput } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
-import { getSession } from './retornarSessao.js';
+import { getSession } from './getSession.js';
 
 const formAlterarCliente = document.getElementById('form_alterar_dados_cliente');
 
@@ -54,7 +54,7 @@ formAlterarCliente.addEventListener('submit', async function(e) {
 
                 if (objetoData.resultado) {
                     
-                    if(objetoData.caixa['corrigido'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
+                    if(objetoData.caixa['retida'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
                         const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
                         tabelaCorrecao.exibirDados(objetoData.caixa);
 
@@ -71,7 +71,7 @@ formAlterarCliente.addEventListener('submit', async function(e) {
                         });
 
 
-                    }else if(objetoData.caixa['corrigido'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
+                    }else if(objetoData.caixa['retida'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
                         btns_conferencia.classList.remove('invisible');
                         viewCaixa.exibirDados(objetoData.caixa);    
 
@@ -85,7 +85,7 @@ formAlterarCliente.addEventListener('submit', async function(e) {
                     //viewCaixa.ocultarTabela();                   
                     //formReset();      
                     btns_conferencia.classList.remove('invisible');                                  
-                    notificacao.exibir(`Erro ao tentar alterar os dados do Cliente: ${siglaCliente} - Sigla: ${siglaCliente}.`, "danger");
+                    notificacao.exibir(`Nao foram alterados os dados do Cliente: ${siglaCliente} - Sigla: ${siglaCliente}.`, "danger");
                     focusInput('codigo_caixa');
                     //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');
                     

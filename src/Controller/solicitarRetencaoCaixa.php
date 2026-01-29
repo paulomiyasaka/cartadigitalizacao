@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 require '../../vendor/autoload.php';
 
-use Carta\Services\solicitaCorrecaoCaixa;
+use Carta\Services\solicitarRetencaoCaixa;
 use Carta\Services\ConsultarCaixa;
 
 $codigo = $_POST['codigo_caixa'] ?? '';
@@ -13,7 +13,7 @@ $retorno = ['resultado' => false, 'caixa' => null];
 if (strlen($codigo) === 5) {
     
     //$consultarCaixa = new ConsultarCaixa($codigo);
-    $solicitar = new solicitaCorrecaoCaixa($codigo);
+    $solicitar = new solicitarRetencaoCaixa($codigo);
     $resultado = $solicitar->solicitar();
     //echo json_encode($consultarCaixa);
     //var_dump($consultarCaixa);

@@ -2,6 +2,7 @@ import { bloquearSubmit, formReset, focusInput } from './funcoesModal.js';
 import { RenderizarCaixa } from './RenderizarCaixa.js';
 import { RenderizarToast } from './RenderizarToast.js';
 import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
+import { getSession } from './getSession.js';
 
 const botaoSolicitar = document.getElementById('btn_ok_alerta');
 botaoSolicitar.addEventListener('click', async function(e) {
@@ -14,7 +15,7 @@ formData.append('codigo_caixa', codigo);
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
 const notificacao = new RenderizarToast();
 
-await fetch('src/controller/solicitaCorrecaoCaixa.php', {
+await fetch('src/controller/solicitarRetencaoCaixa.php', {
 method: 'POST',
 body: formData
 })
@@ -28,7 +29,7 @@ return response.text();
     
     let objetoData = data;
     objetoData = (typeof data === 'string') ? JSON.parse(data) : data;
-    console.log(objetoData);
+    console.log(objetoData.resultado);
     //console.log(data);
 
     if (objetoData.resultado) {
@@ -38,43 +39,46 @@ return response.text();
         //notificacao.exibir(`Solicitação de correção para a caixa: ${codigo} feita com sucesso!`, "success");
         
         
-        if(objetoData.caixa['solicitarCorrecao'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
+        if(objetoData.caixa['retida'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
             //const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
             //tabelaCorrecao.exibirDados(objetoData.caixa);
 
-            notificacao.exibir(`Solicitação de correção para a caixa: ${codigo} feita com sucesso!`, "success");
-            
+            notificacao.exibir(`Solicitação de retenção para a caixa: ${codigo} feita com sucesso!`, "success");
+
             getSession().then(session => {
+                //console.log("Session: "+session);
                 if (session) {
                     const permissaoBTN = session['perfil'];
                     //console.log("Permissão: "+permissaoBTN);
                     if(permissaoBTN === 'ADMINISTRADOR' || permissaoBTN === 'GESTOR'){
                         btns_conferencia.removeAttribute('class','invisible');
+                        btns_conferencia.setAttribute('class','visible');
                         viewCaixa.exibirDados(objetoData.caixa);
 
+                    }else{
+                        const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
+                        tabelaCorrecao.exibirDados(objetoData.caixa, "bg-danger");
+                        btns_conferencia.setAttribute('class','invisible');
                     }
                     
-                }else{
-                    const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
-                    tabelaCorrecao.exibirDados(objetoData.caixa);
                 }
             });
             
 
-        }else if(objetoData.caixa['solicitarCorrecao'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
+        }else if(objetoData.caixa['retida'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
             btns_conferencia.removeAttribute('class','invisible');
             viewCaixa.exibirDados(objetoData.caixa);            
-            notificacao.exibir(`Erro ao solicitar a correção para a caixa número: ${codigo}.`, "danger");
+            notificacao.exibir(`Não foi possível solicitar a retenção da caixa número: ${codigo}.`, "danger");
             //const btn_correcao_caixa = document.getElementById('btn_correcao_caixa');
             //btn_correcao_caixa.innerText = 'Cancelar Solicitação de Correção';    
 
         }   
         
     } else {
-        viewCaixa.ocultarTabela();                   
-        formReset();                                        
-        notificacao.exibir(`Erro ao tentar solicitar correção para a caixa número: ${codigo}.`, "danger");
-        focusInput();
+        //viewCaixa.ocultarTabela();                   
+        //formReset();                                        
+        notificacao.exibir(`Erro ao solicitar a retenção da caixa número: ${codigo}.`, "danger");
+        focusInput('codigo_caixa');
         //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');
         //hiddenModal('modal_falso', 'codigo_caixa');
     }
@@ -82,7 +86,7 @@ return response.text();
 .catch(error => {
     //console.error('Erro:', error);
     viewCaixa.ocultarTabela();
-    //notificacao.exibir(`Não foi possível conectar ao banco para registrar a alteração da caixa número: ${codigo}.`, "danger");
+    notificacao.exibir(`Não foi possível conectar ao banco para registrar a alteração da caixa número: ${codigo}.`, "danger");
 });
 
 

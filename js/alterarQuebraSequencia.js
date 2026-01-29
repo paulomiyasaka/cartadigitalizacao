@@ -2,6 +2,7 @@ import { RenderizarCaixa } from './RenderizarCaixa.js';
 import { InformarSolicitacaoCorrecao } from './InformarSolicitacaoCorrecao.js';
 import { modalResposta, bloquearSubmit, formReset, focusInput, hiddenModal } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
+import { getSession } from './getSession.js';
 
 const formQuebraSequencia = document.getElementById('form_alterar_quebra_sequencia');
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
@@ -38,15 +39,36 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 
                 const objetoData = data;
                 //objetoData = (typeof data === 'string') ? JSON.parse(data) : data;
-                //console.log(objetoData);
+                console.log("Resultado: "+objetoData.resultado);
                 //console.log(data);
 
                 if (objetoData.resultado) {
                     
-                    if(objetoData.caixa['corrigido'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
-                        const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
-                        tabelaCorrecao.exibirDados(objetoData.caixa);                       
-                    }else if(objetoData.caixa['corrigido'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
+                    if(objetoData.caixa['retida'] === 'SIM' || objetoData.caixa['armazenar'] === 'NAO' || objetoData.caixa['fragmentar'] === 'SIM'){
+                        //const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
+                        //tabelaCorrecao.exibirDados(objetoData.caixa);                       
+
+                        getSession().then(session => {
+                            //console.log("Session: "+session);
+                            if (session) {
+                                const permissaoBTN = session['perfil'];
+                                //console.log("Permissão: "+permissaoBTN);
+                                if(permissaoBTN === 'ADMINISTRADOR' || permissaoBTN === 'GESTOR'){
+                                    btns_conferencia.removeAttribute('class','invisible');
+                                    btns_conferencia.setAttribute('class','visible');
+                                    viewCaixa.exibirDados(objetoData.caixa);
+
+                                }else{
+                                    const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'corpoTabelaCaixa');
+                                    tabelaCorrecao.exibirDados(objetoData.caixa);
+                                }
+                                
+                            }
+                        });
+
+                        notificacao.exibir(`Quebra de sequência alterada na caixa número: ${codigo} com sucesso!`, "success");
+
+                    }else if(objetoData.caixa['retida'] === 'NAO' && objetoData.caixa['armazenar'] === 'SIM' && objetoData.caixa['fragmentar'] === 'NAO'){
                         btns_conferencia.classList.remove('invisible');
                         viewCaixa.exibirDados(objetoData.caixa);
                         const textarea = document.getElementById('alterar_quebra_sequencia');
@@ -59,7 +81,7 @@ formQuebraSequencia.addEventListener('submit', async function(e) {
                 } else {
                     //viewCaixa.ocultarTabela();                   
                     ///formReset();                                        
-                    notificacao.exibir(`Erro ao tentar alterar a quebra de sequência da caixa número: ${codigo}.`, "danger");
+                    notificacao.exibir(`Não foi alterada a quebra de sequência da caixa número: ${codigo}.`, "danger");
                     focusInput('codigo_caixa');
                     btns_conferencia.classList.remove('invisible');
                     //modalResposta('modal_falso', 'show', 'msg_erro', 'Caixa não encontrada!');

@@ -46,7 +46,7 @@ form.addEventListener('submit', async function(e) {
             .catch(error => {
                 //console.error('Erro:', error);
                 //notificacao.exibir(error, "danger");
-                notificacao.exibir('Usuário ou senha inválidos.', "danger");
+                notificacao.exibir('Erro ao consultar banco de dados.', "danger");
             });
 
 });

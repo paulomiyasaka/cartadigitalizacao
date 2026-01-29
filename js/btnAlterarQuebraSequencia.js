@@ -15,9 +15,6 @@ botaoAlterar.addEventListener('click', function() {
     tituloModal.innerText = `Alterar quebra de sequência da caixa: ${codigoCaixa}`;
     focusInput('alterar_quebra_sequencia');
     
-    // 4. Lógica para abrir seu modal (exemplo)
-    //document.getElementById('meuModal').classList.add('active');
-
 
 
 });

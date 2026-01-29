@@ -6,7 +6,7 @@ require '../../vendor/autoload.php';
 
 use Carta\Database\FuncoesSQL;
 
-class solicitaCorrecaoCaixa{
+class solicitarRetencaoCaixa{
 
 	protected int $numeroCaixa;
 
@@ -25,10 +25,10 @@ class solicitaCorrecaoCaixa{
 		$funcoesSQL = new funcoesSQL();
 		$sql = "UPDATE 
 			tb_armazenamento_ar as a
-			SET a.solicitar_correcao = :solicitar_correcao 
+			SET a.retida = :retida 
 			WHERE a.numero_caixa = :numero_caixa";
 
-		$dados = array(":numero_caixa" => $numeroCaixa, ":solicitar_correcao" => 'SIM');
+		$dados = array(":numero_caixa" => $numeroCaixa, ":retida" => 'SIM');
 		$resultado = $funcoesSQL->SQL($sql, $dados);
 		return $resultado;
 		
