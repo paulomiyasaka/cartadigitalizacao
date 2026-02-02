@@ -7,14 +7,17 @@ class OrigemAR
 
     public function __construct
     (
+        public readonly int $codigoCaixa,
         public readonly int $mcuOrigem,
-        public readonly int $matricula,
-        public readonly string $siglaSe,
-        public readonly string $unidadeRemetente,
-        public readonly int $cnpj,
+        public readonly string $unidade,
+        public readonly int $matriculaGerente,
+        public readonly string $nomeGerente,
+        public readonly string $siglaSeArmazenamento,
+        public readonly string $siglaCliente,
+        public readonly ?string $cnpj,
         public readonly string $logradouro,
-        public readonly string $numero,
-        public readonly string $complemento,
+        public readonly ?string $numero,
+        public readonly ?string $complemento,
         public readonly string $bairro,
         public readonly string $cidade,
         public readonly string $uf,
@@ -25,10 +28,13 @@ class OrigemAR
     {
         
         return new self(
+            codigoCaixa: $dados[0]->numero_caixa,
             mcuOrigem: $dados[0]->mcu_origem,
-            matricula: $dados[0]->matricula,
-            siglaSe: $dados[0]->sigla_se,
-            unidadeRemetente: $dados[0]->unidade_remetente,        
+            unidade: $dados[0]->unidade,
+            matriculaGerente: $dados[0]->matricula_gerente,
+            nomeGerente: $dados[0]->nome_gerente,
+            siglaSeArmazenamento: $dados[0]->sigla_se,
+            siglaCliente: $dados[0]->sigla_cliente,        
             cnpj: $dados[0]->cnpj,
             logradouro: $dados[0]->logradouro,
             numero: $dados[0]->numero,

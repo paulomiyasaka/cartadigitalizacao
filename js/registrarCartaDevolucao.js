@@ -10,22 +10,24 @@ botaoGerar.addEventListener('click', async function(e) {
 //bloquearSubmit(e);
 
 const codigo = document.getElementById('codigo_caixa').value;
-const formData = new FormData();
-formData.append('codigo_caixa', codigo);
 
 const viewCaixa = new RenderizarCaixa('tabelaConferencia', 'corpoTabelaCaixa');
 const notificacao = new RenderizarToast();
 //const btnRetencao = document.getElementById('btn_reter_caixa');
-//const btnConferir = document.getElementById('btn_conferir_caixa');
+const btnConferir = document.getElementById('btn_gerar_carta_devolucao');
+const formData = new FormData();
+formData.append('codigo_caixa', codigo);
 const url = 'src/controller/registrarCartaDevolucao.php';
-const session = await getSession();
 
 try{
+    const session = await getSession(); 
+
     const response = await fetch(url, {
         method: 'POST',
         body: formData
     });
     const data = await response.json();
+    //alert(data);
     if(data.resultado){
         if(data.caixa['conferido'] === 'SIM' && data.caixa['retida'] === 'NAO'){
         //if(data.caixa['conferido'] === 'SIM' && data.caixa['retida'] === 'NAO' && data.caixa['armazenar'] === 'SIM' && data.caixa['fragmentar'] === 'NAO')
@@ -42,11 +44,14 @@ try{
             
         }//if data.caixa retida
 
+        notificacao.exibir(`Carta gerada com sucesso para a caixa número: ${codigo}!`, "success");
+
     }else{
         viewCaixa.ocultarTabela();                   
         formReset();    
         const notificacao = new RenderizarToast();                                    
-        notificacao.exibir(`Caixa número ${codigo} não foi encontrada!`, "danger");
+        //notificacao.exibir(`Caixa número ${codigo} não foi encontrada!`, "danger");
+        notificacao.exibir(`Não foi possível gerar a carta para a caixa número ${codigo}.`, "danger");
         focusInput('codigo_caixa');
     }//if data.resultado
 

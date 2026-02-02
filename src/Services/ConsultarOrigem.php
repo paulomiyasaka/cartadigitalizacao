@@ -9,43 +9,45 @@ use Carta\Models\OrigemAR;
 
 class ConsultarOrigem{
 
-	protected int $numeroCaixa;
+	protected int $codigoCaixa;
 
-	public function __construct(int $numeroCaixa)
+	public function __construct(int $codigoCaixa)
 	{
 
-		$this->numeroCaixa = $numeroCaixa;
+		$this->codigoCaixa = $codigoCaixa;
 		//return $this->consultar();
 	}
 
 	public function consultar(): ?OrigemAR
 	{
 
-		$numeroCaixa = $this->numeroCaixa;
+		$codigoCaixa = $this->codigoCaixa;
 		$funcoesSQL = new funcoesSQL();
-		$sql = `SELECT 
-			ori.mcu_origem, 
-			ori.unidade as unidade_remetente,
-			ori.matricula as matricula_gerente, 
-			u.nome as nome_gerente, 
-			ori.sigla_se, 
-			ori.unidade_remetente, 
-			ori.cnpj, 
-			ori.logradouro, 
-			ori.numero, 
-			ori.complemento,  
-			ori.bairro,
-			ori.cidade, 
-			ori.uf,
-			ori.cep
-			FROM tb_origem as ori
-			LEFT JOIN tb_usuario as u 
-			LEFT JOIN tb_armazenamento_ar as ar ON 
-			ori.matricula = u.matricula 
-			AND ar.sigla_se = ori.sigla_se
-			WHERE ar.numero_caixa = :numero_caixa`;
+		$sql = "SELECT 
+		ar.numero_caixa,
+		ar.sigla_cliente, 
+		ori.mcu_origem, 
+		ori.unidade, 
+		ori.matricula_gerente, 
+		u.nome as nome_gerente, 
+		ori.sigla_se, 
+		ori.cnpj,
+		ori.logradouro,
+		ori.numero,
+		ori.complemento,
+		ori.bairro,
+		ori.cidade,
+		ori.uf,
+		ori.cep 
+		FROM tb_endereco_origem as ori 
+		JOIN tb_armazenamento_ar as ar 
+		JOIN tb_usuario as u 
+		ON ori.sigla_se = u.sigla_se 
+		AND u.matricula = ori.matricula_gerente 
+		AND ar.sigla_se_armazenamento = u.sigla_se 
+		WHERE ar.numero_caixa = :numero_caixa";
 
-		$dados = array(":numero_caixa" => $numeroCaixa);
+		$dados = array(":numero_caixa" => $codigoCaixa);
 		$resultado = $funcoesSQL->fetchAllSQL($sql, $dados);
 		// Se o banco não retornar nada, retornamos null
 		//var_dump($resultado);
@@ -55,7 +57,7 @@ class ConsultarOrigem{
             return null;
         }
 
-        return CaixaAR::fromArray($resultado);
+        return OrigemAR::fromArray($resultado);
 		
 
 	}

@@ -38,9 +38,9 @@ class GerarCartaDevolucao{
 		$dataCartaGerada = $this->dataCartaGerada;
 
 		$funcoesSQL = new funcoesSQL();
-		$sql = `INSERT INTO	tb_carta (ano, mcu_origem, numero_caixa, sigla_cliente, sigla_se_armazenamento, data_carta_gerada) VALUES (":ano", ":mcuOrigem", ":numero_caixa", ":siglaCliente", ":siglaSeArmazenamento", ":data_carta_gerada")`;
+		$sql = "INSERT INTO tb_carta (ano, mcu_origem, numero_caixa, sigla_cliente, sigla_se_armazenamento, data_carta_gerada) VALUES (:ano, :mcuOrigem, :numeroCaixa, :siglaCliente, :siglaSeArmazenamento, :dataCartaGerada)";
 
-		$dados = array(":numero_caixa" => $numeroCaixa, ":ano" => $ano,":mcuOrigem" => $mcuOrigem, ":siglaCliente" => $siglaCliente, ":siglaSeArmazenamento" => $siglaSeArmazenamento, ":data_carta_gerada" => $data_carta_gerada);
+		$dados = array(":ano" => $ano,":mcuOrigem" => $mcuOrigem, ":numeroCaixa" => $numeroCaixa, ":siglaCliente" => $siglaCliente, ":siglaSeArmazenamento" => $siglaSeArmazenamento, ":dataCartaGerada" => $dataCartaGerada);
 		$resultado = $funcoesSQL->SQL($sql, $dados);
 		return $resultado;
 		

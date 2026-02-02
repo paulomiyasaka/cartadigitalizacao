@@ -48,8 +48,6 @@ export const menuBotaoManager = {
 
 const perfisDeAcesso = {
 
-    completo: ['reter', 'confirmar', 'alterarQuebra', 'corrigirCaixa', 'corrigirCliente'],
-
     administrador: ['reter', 'confirmar', 'corrigirCaixa', 'corrigirCliente'],
 
     gestor: ['reter', 'confirmar', 'corrigirCaixa', 'corrigirCliente'],
