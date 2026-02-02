@@ -24,7 +24,7 @@ const tabelaCorrecao = new InformarSolicitacaoCorrecao('tabelaConferencia', 'cor
 aguarde.classList.remove('invisible');
 aguarde.classList.add('visible');    
 btns_conferencia.classList.add('invisible');
-console.log(codigo);
+//console.log(codigo);
 
 // Adiciona o arquivo ao objeto FormData
 formData.append('codigo_caixa', codigo);
@@ -39,7 +39,7 @@ try{
     });
 
     const data = await response.json();
-    console.log(data.resultado);
+    //console.log(data.resultado);
     if(data.resultado){
         if(data.caixa['conferido'] === 'SIM' || data.caixa['retida'] === 'SIM' || data.caixa['armazenar'] === 'NAO' || data.caixa['fragmentar'] === 'SIM'){
             const session = await getSession();
@@ -64,11 +64,34 @@ try{
                         tabelaCorrecao.exibirDados(data.caixa, "bg-success");
                     }else{                    
                         tabelaCorrecao.exibirDados(data.caixa, "bg-danger");
-                    }
+                    }                   
                     
-                    
-                }
+                }               
+          
+
             }//if session
+            
+            const formData = new FormData();
+            formData.append('codigo_caixa', codigo);
+            const url = 'src/controller/registrarCartaDevolucao.php';
+
+            try{
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                console.log(data);
+                if(data.resultado){
+                    window.open("consultarCarta.php?caixa="+codigo, "_blank");
+                    viewCaixa.exibirDados(data.caixa, "bg-success");
+                }
+
+            }catch(error){
+                console.error('Erro na requisição:', error);
+                viewCaixa.ocultarTabela();
+            }
+
         }else if(data.caixa['conferido'] === 'NAO' && data.caixa['retida'] === 'NAO' && data.caixa['armazenar'] === 'SIM' && data.caixa['fragmentar'] === 'NAO'){
             btns_conferencia.classList.remove('invisible');
             viewCaixa.exibirDados(data.caixa);

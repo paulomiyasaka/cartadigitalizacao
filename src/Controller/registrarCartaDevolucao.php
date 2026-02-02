@@ -26,7 +26,7 @@ if (strlen($codigo) === 5) {
         $dataCartaGerada = date('Y-m-d');
         $gerarCarta = new GerarCartaDevolucao($codigo, $ano, $mcuOrigem, $siglaCliente, $siglaSeArmazenamento, $dataCartaGerada);
         
-        //echo json_encode($consultarCaixa);
+        //echo json_encode($z);
         //var_dump($resultado);
         //exit;
         if($gerarCarta) {

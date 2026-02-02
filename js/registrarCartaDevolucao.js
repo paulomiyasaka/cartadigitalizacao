@@ -27,8 +27,9 @@ try{
         body: formData
     });
     const data = await response.json();
-    //alert(data);
+    
     if(data.resultado){
+        //alert(data.resultado);
         if(data.caixa['conferido'] === 'SIM' && data.caixa['retida'] === 'NAO'){
         //if(data.caixa['conferido'] === 'SIM' && data.caixa['retida'] === 'NAO' && data.caixa['armazenar'] === 'SIM' && data.caixa['fragmentar'] === 'NAO')
             viewCaixa.exibirDados(data.caixa, "bg-success");
@@ -45,6 +46,7 @@ try{
         }//if data.caixa retida
 
         notificacao.exibir(`Carta gerada com sucesso para a caixa número: ${codigo}!`, "success");
+        window.open("consultarCarta.php?caixa="+codigo, "_blank");
 
     }else{
         viewCaixa.ocultarTabela();                   

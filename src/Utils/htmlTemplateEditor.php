@@ -74,11 +74,14 @@ class HtmlTemplateEditor
         return $this->xpath->query("//{$selector}");
     }
 
-    public function saveAs(string $targetPath): void
+    public function saveAs(string $targetPath): bool
     {
         $html = $this->dom->saveHTML();
         if (file_put_contents($targetPath, $html) === false) {
-            throw new \RuntimeException("Falha ao salvar em {$targetPath}");
+            //throw new \RuntimeException("Falha ao salvar em {$targetPath}");
+            return false;
+        }else{
+            return true;
         }
     }
 }

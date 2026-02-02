@@ -99,7 +99,7 @@ class SalvarDados
                                         $dataConvertida = $this->formatarSeData($celula[$i]);
                                         if($dataConvertida){
                                             $celula[$i] = $dataConvertida;
-                                            die($celula[$i]);
+                                            //die($celula[$i]);
                                             //echo $celula[$i]."<br>";
                                         }else{
                                             $celula[$i] = $funcoes->maiuscula($funcoes->removerAcentuacao($celula[$i]));
@@ -164,14 +164,16 @@ class SalvarDados
    private function formatarSeData($valor)
    {
         // Verifica se é string, tem 10 caracteres e se as barras estão nos lugares certos (índice 2 e 5)
-        $valor = trim($valor);
-        if(is_string($valor) && strlen($valor) === 10 && $valor[2] === '/' && $valor[5] === '/'){
+        //$valor = trim($valor);
+        /*
+        if(is_string($valor) && strlen($valor) === 10 && ($valor[2] === '/' || $valor[2] === '-') && ($valor[5] === '/' || $valor[5] === '-')){
             $dataObj = DateTime::createFromFormat('d/m/Y', $valor);
             // Verifica se a data é real (evita 31/02)
             if($dataObj && $dataObj->format('d/m/Y') === $valor){
                 return $dataObj->format('Y-m-d');
             }
         }
+        
 
         if(is_string($valor) && strlen($valor) === 10){
             $dataObj = DateTime::createFromFormat('d/m/Y', $valor);
@@ -180,8 +182,15 @@ class SalvarDados
                 return $dataObj->format('Y-m-d');
             }
         }
-
-        return false; // Não é uma data válida no formato dd/mm/aaaa
+        */
+        $dataConvertida = false;
+        $dataOriginal = $valor;
+        $dataTratada = str_replace('/', '-', $dataOriginal);
+        $timestamp = strtotime($dataTratada);
+        if($timestamp){
+            $dataConvertida = date('Y-m-d', $timestamp);
+        }       
+        return $dataConvertida; // Não é uma data válida no formato dd/mm/aaaa
     }//formatar se data
 
 
