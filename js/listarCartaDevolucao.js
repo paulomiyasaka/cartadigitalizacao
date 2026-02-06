@@ -18,7 +18,9 @@ inputCaixa.addEventListener('input', async function() {
     const formData = new FormData();
     const btnsGerarCarta = document.getElementById('btns_gerar_carta');
     const aguarde = document.getElementById('aguarde');
-    const btnConferir = document.getElementById('btn_gerar_carta_devolucao');
+    //const btnConferir = document.getElementById('btn_gerar_carta_devolucao');
+    const btnConferir = document.getElementById('btn_consultar_carta_devolucao');
+
 
     const url = 'src/controller/buscarCaixa.php';    
         
