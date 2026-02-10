@@ -25,6 +25,7 @@ include 'footer.php';
 ?>
 
 <script type="text/javascript" src="js/btnAddRemoverLinhas.js"></script>
+<script type="module" src="js/gerarPlanilhaEtiqueta.js"></script>
 
 
   </body>

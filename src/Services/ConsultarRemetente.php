@@ -5,32 +5,30 @@ namespace Carta\Services;
 require '../../vendor/autoload.php';
 
 use Carta\Database\FuncoesSQL;
-use Carta\Models\OrigemAR;
+use Carta\Models\RemetenteAR;
 
-class ConsultarOrigem{
+class ConsultarRemetente{
 
-	protected int $codigoCaixa;
+	protected string $remetente;
 
-	public function __construct(int $codigoCaixa)
+	public function __construct(string $remetente)
 	{
 
-		$this->codigoCaixa = $codigoCaixa;
+		$this->remetente = $remetente;
 		//return $this->consultar();
 	}
 
-	public function consultar(): ?OrigemAR
+	public function consultar(): ?RemetenteAR
 	{
 
-		$codigoCaixa = $this->codigoCaixa;
+		$remetente = $this->remetente;
 		$funcoesSQL = new funcoesSQL();
-		$sql = "SELECT 
-		ar.numero_caixa,
-		ar.sigla_cliente, 
+		$sql = "SELECT  
+		ori.sigla_se,
 		ori.mcu_origem, 
 		ori.unidade, 
 		ori.matricula_gerente, 
 		u.nome as nome_gerente, 
-		ori.sigla_se, 
 		ori.cnpj,
 		ori.logradouro,
 		ori.numero,
@@ -40,20 +38,18 @@ class ConsultarOrigem{
 		ori.uf,
 		ori.cep 
 		FROM tb_endereco_origem as ori 
-		JOIN tb_armazenamento_ar as ar 
 		JOIN tb_usuario as u 
-		ON ori.sigla_se = u.sigla_se 
+		ON u.matricula = ori.matricula_gerente 
 		AND u.matricula = ori.matricula_gerente 
-		AND ar.sigla_se_armazenamento = u.sigla_se 
-		WHERE ar.numero_caixa = :numero_caixa";
+		WHERE ori.sigla_se = :sigla_se";
 
-		$dados = array(":numero_caixa" => $codigoCaixa);
+		$dados = array(":sigla_se" => $remetente);
 		$resultado = $funcoesSQL->fetchAllSQL($sql, $dados);
         if (empty($resultado)) {
             return null;
         }
 
-        return OrigemAR::fromArray($resultado);
+        return RemetenteAR::fromArray($resultado);
 		
 
 	}

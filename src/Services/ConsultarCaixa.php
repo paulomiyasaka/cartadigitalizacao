@@ -48,10 +48,6 @@ class ConsultarCaixa{
 
 		$dados = array(":numero_caixa" => $numeroCaixa);
 		$resultado = $funcoesSQL->fetchAllSQL($sql, $dados);
-		// Se o banco não retornar nada, retornamos null
-		//var_dump($resultado);
-		//echo $sql;
-        //exit;
         if (empty($resultado)) {
             return null;
         }

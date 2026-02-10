@@ -6,7 +6,7 @@ async function carregarSES() {
         const resposta = await fetch('src/Controller/getSuperintendencia.php'); 
         const dados = await resposta.json();
 
-        const selectInicial = document.querySelector("#select_se");
+        const selectInicial = document.querySelector("select");
 
         if (selectInicial && dados.resultado) {
             // 1. Criamos uma variável para armazenar todos os HTMLs das opções
@@ -57,11 +57,11 @@ function adicionarLinha(botaoAtual) {
     
     // 3. Define o conteúdo da nova linha com o botão "Adicionar"
     //celulaSe.innerHTML = "Linha " + (totalLinhas + 1);
-    celulaSE.innerHTML = `<select class="form-select" required>
+    celulaSE.innerHTML = `<select class="form-select" name="destinatarios[]" required>
                     <option value="" selected disabled>Selecione</option>
                     ${opcoesSE}
                   </select>`;
-    celulaQuantidade.innerHTML = `<input type="number" class="form-control w-50 mx-auto text-center" id="quantidade_etiqueta" name="quantidade_etiqueta" required>`;
+    celulaQuantidade.innerHTML = `<input type="number" class="form-control w-50 mx-auto text-center" name="quantidade_etiqueta[]" required>`;
     celulaBotao.innerHTML = `<button onclick="adicionarLinha(this)" class="btn btn-light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
