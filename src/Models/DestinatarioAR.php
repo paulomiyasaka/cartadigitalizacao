@@ -39,6 +39,25 @@ class DestinatarioAR
         );
     }
 
+    public static function fromObject(object $dados): self 
+    {
+        
+        return new self(
+            matriculaGestorAR: $dados->matricula,
+            nomeGestorAR: $dados->nome,
+            siglaSe: $dados->sigla_se,
+            unidade: $dados->unidade,
+            logradouro: $dados->logradouro,
+            numero: $dados->numero,
+            complemento: $dados->complemento,
+            bairro: $dados->bairro,
+            cidade: $dados->cidade,
+            uf: $dados->uf,
+            cep: $dados->cep
+
+        );
+    }
+
 
 }
 

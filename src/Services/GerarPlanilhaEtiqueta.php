@@ -9,29 +9,35 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carta\Services\ConsultarDestinatarios;
+use Carta\Models\OrigemAR;
+use Carta\Models\DestinatarioAR;
+use Carta\Models\EmbalagemAR;
 
 class GerarPlanilhaEtiqueta {
     private OrigemAR $remetente; 
     private DestinatarioAR $listaDestinatarios;
+    private EmbalagemAR $embalagemAR;
     private array $dadosComplementares;
-    private $diretorioSaida = '../../planilhaEtiquetas/';
+    private string $diretorioSaida = '../../planilhaEtiquetas/';
 
-    public function __construct($Remetente, $ListaDestinatarios, $DadosComplementares) {
+    public function __construct($Remetente, $ListaDestinatarios, $embalagemAR, $DadosComplementares) {
         
         $this->remetente = $Remetente;
         $this->listaDestinatarios = $ListaDestinatarios;
+        $this->embalagemAR = $embalagemAR;
         $this->dadosComplementares = $DadosComplementares;
 
         if (!file_exists($this->diretorioSaida)) {
             mkdir($this->diretorioSaida, 0777, true);
         }
-    }
+    }//construtor
 
     public function processar() {
         $this->limparArquivosAntigos();
         $remetente = $this->remetente;
         $listaDestinatarios = $this->listaDestinatarios;
         $dadosComplementares = $this->dadosComplementares;
+        $embalagemAR = $this->embalagemAR;
 
         $caminhoArquivo = $this->gerarPlanilha($remetente, $listaDestinatarios, $dadosComplementares);
         if($caminhoArquivo){
@@ -45,10 +51,10 @@ class GerarPlanilhaEtiqueta {
             return false;
         }
         
-    }
+    }//processar
 
 
-    private function gerarPlanilha($Remetente, $ListaDestinatarios, $DadosComplementares) {
+    private function gerarPlanilha($remetente, $listaDestinatarios, $embalagemAR, $dadosComplementares) {
         // 1. Limpeza de segurança (arquivos > 12h)
         $this->limparArquivosAntigos();
 
@@ -97,16 +103,18 @@ class GerarPlanilhaEtiqueta {
             $sheet->setCellValue('Q' . $linha, $Destinatario->cidade);
             $sheet->setCellValue('R' . $linha, $Destinatario->uf);
 
-            $sheet->setCellValue('S' . $linha, $DadosComplementares->codigo_servico);
-            $sheet->setCellValue('T' . $linha, $DadosComplementares->tipo_objeto);
+            $sheet->setCellValue('S' . $linha, $DadosComplementares->codigoServico);
+            $sheet->setCellValue('T' . $linha, $DadosComplementares->tipoObjeto);
             $sheet->setCellValue('U' . $linha, $DadosComplementares->peso);
-            $sheet->setCellValue('V' . $linha, $DadosComplementares->altura);
-            $sheet->setCellValue('W' . $linha, $DadosComplementares->largura);
-            $sheet->setCellValue('X' . $linha, $DadosComplementares->comprimento);
+            $sheet->setCellValue('V' . $linha, $EmbalagemAR->altura);
+            $sheet->setCellValue('W' . $linha, $EmbalagemAR->largura);
+            $sheet->setCellValue('X' . $linha, $EmbalagemAR->comprimento);
             $sheet->setCellValue('Y' . $linha, $DadosComplementares->observacao);
-            $sheet->setCellValue('Z' . $linha, $DadosComplementares->item_declaracao);
-            $sheet->setCellValue('AA' . $linha, $DadosComplementares->valor);
-            $sheet->setCellValue('AB' . $linha, $Destinatario->copias);
+            $sheet->setCellValue('Z' . $linha, $DadosComplementares->itemDeclaracao);
+            $sheet->setCellValue('AA' . $linha, $DadosComplementares->quantidade);
+            $sheet->setCellValue('AB' . $linha, $DadosComplementares->valor);
+            $sheet->setCellValue('AC' . $linha, $DadosComplementares->prazoPostagem);
+            $sheet->setCellValue('AD' . $linha, $Destinatario->copias);
 
             $linha++;
         }
@@ -120,7 +128,7 @@ class GerarPlanilhaEtiqueta {
         }
 
         
-    }
+    }//gerarPlanilha
 
     private function limparArquivosAntigos() {
         $arquivos = glob($this->diretorioSaida . "*.xlsx");
@@ -131,7 +139,7 @@ class GerarPlanilhaEtiqueta {
                 unlink($arquivo);
             }
         }
-    }
+    }//limparArquivosAntigos
 
     private function downloadArquivo($caminho) {
         if (file_exists($caminho)) {
@@ -147,5 +155,6 @@ class GerarPlanilhaEtiqueta {
         }else{
             return false;
         }
-    }
+    }//downloadArquivo
+
 }

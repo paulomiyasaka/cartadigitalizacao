@@ -14,19 +14,25 @@
           <thead>
             <tr>
               <th scope="col">Selecione a SE</th>
-              <th scope="col">Quantidade de Etiquetas</th>    
+              <th scope="col">Quantidade de Etiquetas</th>
+              <th scope="col">Tipo Embalagem</th>    
               <th scope="col">Ação</th>                
             </tr>
           </thead>
           <tbody>
             <tr>
               <th class="mb-3">
-                <select class="form-select" name="destinatarios[]" required>
+                <select id="select_destinatarios" class="form-select" name="destinatarios[]" required>
                   <option value="" selected disabled>Selecione</option>
                 </select>
               </th>
               <th class="mb-3">
-                <input type="number" class="form-control w-50 mx-auto text-center" name="quantidade_etiqueta[]" required>
+                <input type="number" class="form-control w-50 mx-auto text-center" min="1" name="quantidade_etiqueta[]" required>
+              </th>
+              <th class="mb-3">
+                <select id="select_embalagens" class="form-select" name="tipo_embalagem[]" required>
+                  <option value="" selected disabled>Selecione</option>
+                </select>
               </th>
               <th class="mb-3">
                 <button onclick="adicionarLinha(this)" class="btn btn-light">

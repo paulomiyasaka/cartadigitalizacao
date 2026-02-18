@@ -12,7 +12,7 @@ class ConsultarDestinatarios{
 	public function consultar(): array
 	{
 
-		$codigoCaixa = $this->codigoCaixa;
+		//$codigoCaixa = $this->codigoCaixa;
 		$funcoesSQL = new funcoesSQL();
 		$sql = "SELECT 
 		dest.matricula, 
@@ -38,7 +38,7 @@ class ConsultarDestinatarios{
         //return DestinatarioAR::fromArray($resultado);        
 
         $listaDTO = array_map(function($itemIndividual) {
-            return DestinatarioAR::fromArray($itemIndividual);
+            return DestinatarioAR::fromObject($itemIndividual);
         }, $resultado);
 
         return $listaDTO;
