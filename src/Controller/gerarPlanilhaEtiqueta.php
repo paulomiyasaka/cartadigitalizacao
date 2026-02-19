@@ -71,6 +71,9 @@ if (count($dadosEtiqueta) >= 1) {
 
             }//foreach
 
+            $gerarEtiqueta = new GerarPlanilhaEtiqueta($listaRemetente, $destino, $dadosComplementares);
+            $gerarEtiqueta->processar();
+
             $retorno['resultado'] = TRUE;
             $retorno['etiqueta'] = $montaEtiqueta;
                     
