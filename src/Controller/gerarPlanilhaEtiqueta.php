@@ -18,7 +18,7 @@ $data = new DateTimeImmutable();
 $validade = $data->modify('+7 days');
 
 $etiqueta = [];
-$montaEtiqueta = [];
+$listaEtiquetas = [];
 $dadosComplementares = [];
 $dadosComplementares['codigoServico'] = "44172";//PAC
 $dadosComplementares['tipoObjeto'] = '';
@@ -47,6 +47,9 @@ if (count($dadosEtiqueta) >= 1) {
         if(count($listaDestinatarios) >= 1) {  
             $destinatarios = [];
             foreach ($listaDestinatarios as $obj) {
+                if(!isset($obj->cnpj)){
+                    $obj->cnpj = '';
+                }
                 $destinatarios[$obj->siglaSe] = $obj;
             }
 
@@ -57,6 +60,7 @@ if (count($dadosEtiqueta) >= 1) {
                 $dadosComplementares['altura'] = $embalagem[0];
                 $dadosComplementares['largura'] = $embalagem[1];
                 $dadosComplementares['comprimento'] = $embalagem[2];
+                $dadosComplementares['quantidade'] = 1;
                 $dadosComplementares['copias'] = (int)$dadosEtiq['quantidade'];                
 
                 if (isset($destinatarios[$sigla])) {
@@ -67,15 +71,16 @@ if (count($dadosEtiqueta) >= 1) {
                 $etiqueta['destinatario'] = $destino;
                 $etiqueta['dadosComplementares'] = $dadosComplementares;
 
-                $montaEtiqueta[$indice++] = $etiqueta;
+                $listaEtiquetas[$indice++] = $etiqueta;
 
             }//foreach
 
-            $gerarEtiqueta = new GerarPlanilhaEtiqueta($listaRemetente, $destino, $dadosComplementares);
+            //$gerarEtiqueta = new GerarPlanilhaEtiqueta($listaRemetente, $destino, $dadosComplementares);
+            $gerarEtiqueta = new GerarPlanilhaEtiqueta($listaEtiquetas);
             $gerarEtiqueta->processar();
 
-            $retorno['resultado'] = TRUE;
-            $retorno['etiqueta'] = $montaEtiqueta;
+            $retorno['resultado'] = true;
+            $retorno['etiqueta'] = $listaEtiquetas;
                     
         }
     

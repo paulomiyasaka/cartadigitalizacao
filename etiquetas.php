@@ -10,6 +10,8 @@ $validacoes = new Validacoes();
 //$validacoes->validar();
 $validacoes->interromperReenvioFormulario();
 $validacoes->verificarUsuarioLogado();
+$caminho = "planilhaEtiquetas/";
+$validacoes->limparArquivosAntigos($caminho);
 $usuario['perfil'] = $_SESSION['perfil_usuario'];
 $usuario['nome'] = $_SESSION['nome'];
 $usuario['matricula'] = $_SESSION['matricula'];

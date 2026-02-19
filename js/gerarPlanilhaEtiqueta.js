@@ -1,4 +1,4 @@
-import { focusInput, bloquearSubmit } from './funcoesModal.js';
+import { focusInput, bloquearSubmit, atualizarPagina } from './funcoesModal.js';
 import { RenderizarToast } from './RenderizarToast.js';
 import { getSession } from './getSession.js';
 
@@ -47,10 +47,11 @@ formGerarCarta.addEventListener('submit', async function(e) {
 
             if(data.resultado){
                 notificacao.exibir(`Planilha gerada com sucesso!`, "success");
+                
             }else{
-                //notificacao.exibir(`Erro ao tentar gerar a planilha!`, "danger");
+                notificacao.exibir(`Erro ao tentar gerar a planilha!`, "danger");
                 console.log(data);
-                notificacao.exibir(data[0].unidade, "danger");
+                //notificacao.exibir(data, "danger");
 
             }//if data.resultado
 

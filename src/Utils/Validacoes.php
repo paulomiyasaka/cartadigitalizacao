@@ -34,6 +34,18 @@ class Validacoes
 	}
 
 
+	public function limparArquivosAntigos($caminho) {
+        $arquivos = glob($caminho . "*.xlsx");
+        $tempoLimite = 12 * 3600; // horas em segundos
+
+        foreach ($arquivos as $arquivo) {
+            if (time() - filemtime($arquivo) > $tempoLimite) {
+                unlink($arquivo);
+            }
+        }
+    }//limparArquivosAntigos
+
+
 
 }
 
