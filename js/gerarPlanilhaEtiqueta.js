@@ -49,7 +49,7 @@ formGerarCarta.addEventListener('submit', async function(e) {
                 notificacao.exibir(`Planilha gerada com sucesso!`, "success");
             }else{
                 //notificacao.exibir(`Erro ao tentar gerar a planilha!`, "danger");
-                //console.log(data);
+                console.log(data);
                 notificacao.exibir(data[0].unidade, "danger");
 
             }//if data.resultado

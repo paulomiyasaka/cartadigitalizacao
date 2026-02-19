@@ -11,20 +11,17 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carta\Services\ConsultarDestinatarios;
 use Carta\Models\OrigemAR;
 use Carta\Models\DestinatarioAR;
-use Carta\Models\EmbalagemAR;
 
 class GerarPlanilhaEtiqueta {
     private OrigemAR $remetente; 
     private DestinatarioAR $listaDestinatarios;
-    private EmbalagemAR $embalagemAR;
     private array $dadosComplementares;
     private string $diretorioSaida = '../../planilhaEtiquetas/';
 
-    public function __construct($Remetente, $ListaDestinatarios, $embalagemAR, $DadosComplementares) {
+    public function __construct($Remetente, $ListaDestinatarios, $DadosComplementares) {
         
         $this->remetente = $Remetente;
         $this->listaDestinatarios = $ListaDestinatarios;
-        $this->embalagemAR = $embalagemAR;
         $this->dadosComplementares = $DadosComplementares;
 
         if (!file_exists($this->diretorioSaida)) {
@@ -37,7 +34,6 @@ class GerarPlanilhaEtiqueta {
         $remetente = $this->remetente;
         $listaDestinatarios = $this->listaDestinatarios;
         $dadosComplementares = $this->dadosComplementares;
-        $embalagemAR = $this->embalagemAR;
 
         $caminhoArquivo = $this->gerarPlanilha($remetente, $listaDestinatarios, $dadosComplementares);
         if($caminhoArquivo){
@@ -54,7 +50,7 @@ class GerarPlanilhaEtiqueta {
     }//processar
 
 
-    private function gerarPlanilha($remetente, $listaDestinatarios, $embalagemAR, $dadosComplementares) {
+    private function gerarPlanilha($remetente, $listaDestinatarios, $dadosComplementares) {
         // 1. Limpeza de segurança (arquivos > 12h)
         $this->limparArquivosAntigos();
 

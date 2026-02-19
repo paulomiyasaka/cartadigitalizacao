@@ -15,7 +15,13 @@ class GetEmbalagens{
 			e.embalagem, 
 			e.altura,
 			e.largura,
-			e.comprimento 
+			e.comprimento,
+			CONCAT(
+				e.embalagem, ' - A:', 
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(altura, 1)), '.00', ''), ' x L:', 
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(largura, 1)), '.00', ''), ' x C:',
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(comprimento, 1)), '.00', '')) AS 
+			embalagem_detalhada  
 			FROM tb_embalagens as e
 			ORDER BY e.embalagem ASC";
 
@@ -40,7 +46,13 @@ class GetEmbalagens{
 			e.embalagem, 
 			e.altura,
 			e.largura,
-			e.comprimento 
+			e.comprimento,
+			CONCAT(
+				e.embalagem, ' - A:', 
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(altura, 1)), '.00', ''), ' x L:', 
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(largura, 1)), '.00', ''), ' x C:',
+				REPLACE(TRIM(TRAILING '.0' FROM ROUND(comprimento, 1)), '.00', '')) AS 
+			embalagem_detalhada 
 			FROM tb_embalagens as e
 			WHERE embalagem = :embalagem";
 

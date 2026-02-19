@@ -33,13 +33,13 @@ async function carregarSES() {
             let htmlOptionsEmbalagens = '<option value="" selected disabled>Selecione</option>';
 
             dadosEmbalagens.embalagens.forEach(item => {
-                htmlOptionsEmbalagens += `<option value="${item.altura}x${item.largura}x${item.comprimento}">${item.embalagem}</option>`;
+                htmlOptionsEmbalagens += `<option value="${item.altura}x${item.largura}x${item.comprimento}">${item.embalagemDetalhada}</option>`;
             });
 
             selectEmbalagens.innerHTML = htmlOptionsEmbalagens;
 
             opcoesEmbalagens = dadosEmbalagens.embalagens.map(item => 
-                `<option value="${item.altura}x${item.largura}x${item.comprimento}">${item.embalagem}</option>`
+                `<option value="${item.altura}x${item.largura}x${item.comprimento}">${item.embalagemDetalhada}</option>`
             ).join('');
 
         }//select_embalagens
@@ -81,7 +81,7 @@ function adicionarLinha(botaoAtual) {
                     <option value="" selected disabled>Selecione</option>
                     ${opcoesSE}
                   </select>`;
-    celulaQuantidade.innerHTML = `<input type="number" class="form-control w-50 mx-auto text-center" min="0" name="quantidade_etiqueta[]" required>`;
+    celulaQuantidade.innerHTML = `<input type="number" class="form-control w-50 mx-auto text-center" min="1" name="quantidade_etiqueta[]" required>`;
     celulaEmbalagem.innerHTML = `<select class="form-select" name="tipo_embalagem[]" required>
                     <option value="" selected disabled>Selecione</option>
                     ${opcoesEmbalagens}

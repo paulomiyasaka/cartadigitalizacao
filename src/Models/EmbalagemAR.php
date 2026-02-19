@@ -7,6 +7,7 @@ class EmbalagemAR
 
     public function __construct
     (
+        public readonly string $embalagemDetalhada,
         public readonly string $embalagem,
         public readonly string $altura,
         public readonly string $largura,
@@ -17,6 +18,7 @@ class EmbalagemAR
     {
         
         return new self(
+            embalagemDetalhada: $dados->embalagem_detalhada,
             embalagem: $dados->embalagem,
             altura: $dados->altura,
             largura: $dados->largura,
@@ -30,6 +32,7 @@ class EmbalagemAR
     {
         
         return new self(
+            embalagemDetalhada: $dados[0]->embalagem_detalhada,
             embalagem: $dados[0]->embalagem,
             altura: $dados[0]->altura,
             largura: $dados[0]->largura,
