@@ -93,12 +93,12 @@ foreach ($lista_arquivos as $key => $arquivo){
 */
     }
 
-
+$tabela .= "</tr>";
   ?>
 
-        
+<!--        
 </tr>
-
+-->
 <?php
 
 }

@@ -106,7 +106,7 @@ class GerarPlanilhaEtiqueta {
         //foreach ($listaDestinatarios as $destinatario) {
         for($i = 0; $i < count($listaDestinatarios); $i++){
             //var_dump($itemEtiqueta);
-            $sheet->setCellValue('A' . $linha, $remetente[$i]->nomeGerente);
+            $sheet->setCellValue('A' . $linha, $remetente[$i]->unidade.' - '.$remetente[$i]->nomeGerente);
             $sheet->setCellValue('B' . $linha, $remetente[$i]->cnpj);
             $sheet->setCellValue('C' . $linha, $remetente[$i]->cep);
             $sheet->setCellValue('D' . $linha, $remetente[$i]->logradouro);
@@ -116,7 +116,7 @@ class GerarPlanilhaEtiqueta {
             $sheet->setCellValue('H' . $linha, $remetente[$i]->cidade);
             $sheet->setCellValue('I' . $linha, $remetente[$i]->uf);
 
-            $sheet->setCellValue('J' . $linha, $listaDestinatarios[$i]->nomeGestorAR);
+            $sheet->setCellValue('J' . $linha, $listaDestinatarios[$i]->unidade.' - '.$listaDestinatarios[$i]->nomeGestorAR);
             $sheet->setCellValue('K' . $linha, $listaDestinatarios[$i]->cnpj);
             $sheet->setCellValue('L' . $linha, $listaDestinatarios[$i]->cep);
             $sheet->setCellValue('M' . $linha, $listaDestinatarios[$i]->logradouro);

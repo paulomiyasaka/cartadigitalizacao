@@ -10,14 +10,14 @@
           <form id="form_alterar_dados_cliente" method="post">
             <div class="mb-3 w-75 mx-auto">
               <label for="corrigir_cliente_armazenar" class="form-label"><strong>Armazenar:</strong></label>
-              <select id="corrigir_cliente_armazenar" name="corrigir_cliente_armazenar" class="form-select text-center" aria-label="Default" required>
+              <select id="corrigir_cliente_armazenar" name="corrigir_cliente_armazenar" class="form-select text-center" aria-label="Default">
                 <option selected disabled>Selecionar</option>
                 <option value="SIM">SIM</option>
                 <option value="NAO">NÃO</option>
               </select>
 
               <label for="corrigir_cliente_prazo_armazenamento" class="form-label mt-3"><strong>Prazo de Armazenamento:</strong></label>
-              <select id="corrigir_cliente_prazo_armazenamento" name="corrigir_cliente_prazo_armazenamento" class="form-select text-center" aria-label="Default" required>
+              <select id="corrigir_cliente_prazo_armazenamento" name="corrigir_cliente_prazo_armazenamento" class="form-select text-center" aria-label="Default" >
                 <option selected disabled>Selecionar</option>
                 <option value="0">0</option>
                 <option value="7">7</option>
